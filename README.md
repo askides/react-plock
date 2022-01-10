@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# About Plock 🌈
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Plock is a simple responsive masonry layout implementation for React. Very simple to use and easy to understand.
 
-## Available Scripts
+## Can I see a demo? 👀
 
-In the project directory, you can run:
+I'm working on a demo, please check back soon.
 
-### `npm start`
+### Getting Started 🤩
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The most simple way to use Plock is to import it in your React app:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```jsx
+<Plock>
+  <SuperComponent>I'm a super component! 😎</SuperComponent>
+  <SuperComponent>I'm a super component too! 🤓</SuperComponent>
+  <SuperComponent>Don't forget me! 😏</SuperComponent>
+</Plock>
+```
 
-### `npm test`
+And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with three columns. You can also override this prop by setting the `nColumns` prop:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+<Plock nColumns={2}>
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-### `npm run build`
+Also the gap between columns can be set by setting the `gap` prop:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`````jsx
+<Plock nColumns={3} gap={10}>
+    <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+    <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+    <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+    <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+````jsx
+<Plock style={{ background: "red" }} className="an-happy-class">
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-### `npm run eject`
+### Built With 🏗️
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [ReactJS](https://reactjs.org/) - React
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Versioning 🚦
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/itsrennyman/react-plock/tags).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Authors 🙋
 
-## Learn More
+- **Renato Pozzi** - _Initial work_ - [itsrennyman](https://github.com/itsrennyman)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Stargazers 🌟
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![Stargazers repo roster for @itsrennyman/react-plock](https://reporoster.com/stars/itsrennyman/react-plock)](https://github.com/itsrennyman/react-plock/stargazers)
 
-### Code Splitting
+See also the list of [contributors](https://github.com/itsrennyman/react-plock/contributors) who participated in this project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+`````
