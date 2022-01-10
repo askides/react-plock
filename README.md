@@ -1,6 +1,6 @@
 # About Plock 🌈
 
-Plock is a simple responsive masonry layout implementation for React. Very simple to use and easy to understand.
+Plock is a responsive masonry layout implementation for React. Very simple to use and easy to understand.
 
 ## Can I see a demo? 👀
 
