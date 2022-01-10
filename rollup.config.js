@@ -6,7 +6,7 @@ const packageJson = require("./package.json");
 
 /* eslint-disable */
 export default {
-  input: "src/index.js",
+  input: "src/components/index.js",
   output: [
     {
       file: packageJson.main,

@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "start": "react-scripts start",
     "test": "react-scripts test",
     "test-ci": "react-scripts test --watchAll=false",
     "semantic-release": "semantic-release"
@@ -63,6 +64,18 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/{!(App.js),}.js"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   }
 }
