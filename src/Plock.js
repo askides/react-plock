@@ -2,7 +2,7 @@ import * as React from "react";
 
 const uuid = () => Math.random().toString(36).substring(2, 12);
 
-export function Plock({ children, className, styles, nColumns = 3, gap = 10 }) {
+export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
   const [columns, setColumns] = React.useState(() => {
     return Array.from({ length: nColumns }, (e) => []);
   });
@@ -40,7 +40,7 @@ export function Plock({ children, className, styles, nColumns = 3, gap = 10 }) {
     <div
       data-testid="plock-container"
       className={className}
-      style={{ styles, ...defaultStyles.mainGrid }}
+      style={{ style, ...defaultStyles.mainGrid }}
     >
       {columns.map((column, index) => {
         return (

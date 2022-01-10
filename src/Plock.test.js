@@ -105,7 +105,7 @@ it("should be possible to customize the styles of the main container using style
 });
 
 it("should not override the default styles", () => {
-  render(<Plock styles={{ display: "flex" }} />);
+  render(<Plock style={{ display: "flex" }} />);
 
   const element = screen.getByTestId("plock-container");
   expect(element).toHaveStyle({ display: "grid" });
