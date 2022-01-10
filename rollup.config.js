@@ -6,7 +6,7 @@ const packageJson = require("./package.json");
 
 /* eslint-disable */
 export default {
-  input: "src/Plock.js",
+  input: "src/index.js",
   output: [
     {
       file: packageJson.main,
