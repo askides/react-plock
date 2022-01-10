@@ -1,7 +1,7 @@
 {
-  "name": "plock",
-  "version": "0.1.0",
-  "private": true,
+  "name": "react-plock",
+  "version": "0.0.0-semantically-released",
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
@@ -14,8 +14,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test-ci": "react-scripts test --watchAll=false",
+    "semantic-release": "semantic-release"
   },
   "eslintConfig": {
     "extends": [
@@ -36,12 +38,34 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cz-conventional-changelog": "3.3.0",
+    "semantic-release": "18.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsrennyman/react-plock.git"
+  },
+  "author": "Renato <renato.pozzi.dev@gmail.com> (https://renatopozzi.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itsrennyman/react-plock/issues"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "release": {
+    "branches": [
+      {
+        "name": "main"
+      },
+      {
+        "name": "next",
+        "channel": "next",
+        "prerelease": "rc"
+      }
+    ]
   },
   "jest": {
     "collectCoverageFrom": [
