@@ -31,18 +31,18 @@ And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with 
 
 Also the gap between columns can be set by setting the `gap` prop:
 
-`````jsx
+```jsx
 <Plock nColumns={3} gap={10}>
-    <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
-    <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
-    <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
-    <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
 </Plock>
 ```
 
 Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
-````jsx
+```jsx
 <Plock style={{ background: "red" }} className="an-happy-class">
   <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
   <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
@@ -72,4 +72,7 @@ See also the list of [contributors](https://github.com/itsrennyman/react-plock/c
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-`````
+
+```
+
+```
