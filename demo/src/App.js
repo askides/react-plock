@@ -1,3 +1,5 @@
+import { Plock } from "react-plock";
+
 const random = (min = 300, max = 450) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -43,11 +45,11 @@ function App() {
             <span className="pl-3">Star on Github!</span>
           </a>
         </div>
-        <div className="grid grid-cols-3 gap-10">
+        <Plock nColumns={3} gap={10}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
             <Tile key={i}>{i}</Tile>
           ))}
-        </div>
+        </Plock>
       </div>
     </div>
   );
