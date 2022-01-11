@@ -29,21 +29,23 @@ function App() {
   return (
     <div className="min-h-screen bg-red-600">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex justify-between items-center">
-          <div className="text-white space-y-5 py-16">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+          <div className="text-white space-y-5 py-10 sm:py-16">
             <h1 className="text-6xl font-bold tracking-tight">React Plock</h1>
             <p className="text-xl max-w-xl">
               Plock is a responsive masonry layout implementation for React.
               Very simple to use and easy to understand.
             </p>
           </div>
-          <a
-            href="https://github.com/itsrennyman/react-plock"
-            className="text-white font-medium outline-none px-4 py-3 rounded-md bg-gray-800 hover:ring ring-offset-4 ring-offset-red-600 ring-white transition-all duration-200 flex"
-          >
-            <Github className="w-6 h-6" />
-            <span className="pl-3">Star on Github!</span>
-          </a>
+          <div className="mb-16 sm:mb-0">
+            <a
+              href="https://github.com/itsrennyman/react-plock"
+              className="text-white justify-center font-medium outline-none px-4 py-3 rounded-md bg-gray-800 hover:ring ring-offset-4 ring-offset-red-600 ring-white transition-all duration-200 flex"
+            >
+              <Github className="w-6 h-6" />
+              <span className="pl-3">Star on Github!</span>
+            </a>
+          </div>
         </div>
         <Plock nColumns={3} gap={10}>
           {Array(101)
