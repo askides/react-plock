@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+<img src="public/header.png" />
+</p>
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+<p align="center" style="padding-bottom:3rem">
+<img alt="Release" src="https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge" />
+<img alt="Stars" src="https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge" />
+<img alt="License" src="https://img.shields.io/github/license/itsrennyman/react-plock?style=for-the-badge" />
+</p>
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# About Plock 🌈
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Plock is a responsive masonry layout implementation for React. Very simple to use and easy to understand.
 
-### `npm test`
+## Can I see a demo? 👀
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I'm working on a demo, please check back soon.
 
-### `npm run build`
+### Getting Started 🤩
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The most simple way to use Plock is to import it in your React app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```jsx
+<Plock>
+  <SuperComponent>I'm a super component! 😎</SuperComponent>
+  <SuperComponent>I'm a super component too! 🤓</SuperComponent>
+  <SuperComponent>Don't forget me! 😏</SuperComponent>
+</Plock>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with three columns. You can also override this prop by setting the `nColumns` prop:
 
-### `npm run eject`
+```jsx
+<Plock nColumns={2}>
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Also the gap between columns can be set by setting the `gap` prop:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```jsx
+<Plock nColumns={3} gap={10}>
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+<Plock style={{ background: "red" }} className="an-happy-class">
+  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
+  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
+  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
+  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
+</Plock>
+```
 
-## Learn More
+### Built With 🏗️
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [ReactJS](https://reactjs.org/) - React
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Versioning 🚦
 
-### Code Splitting
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/itsrennyman/react-plock/tags).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Authors 🙋
 
-### Analyzing the Bundle Size
+- **Renato Pozzi** - _Initial work_ - [itsrennyman](https://github.com/itsrennyman)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Stargazers 🌟
 
-### Making a Progressive Web App
+[![Stargazers repo roster for @itsrennyman/react-plock](https://reporoster.com/stars/itsrennyman/react-plock)](https://github.com/itsrennyman/react-plock/stargazers)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+See also the list of [contributors](https://github.com/itsrennyman/react-plock/contributors) who participated in this project.
 
-### Advanced Configuration
+### License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
