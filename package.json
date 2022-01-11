@@ -1,5 +1,6 @@
 {
   "name": "react-plock",
+  "description": "Plock is a responsive masonry layout implementation for React. Very simple to use and easy to understand.",
   "version": "0.0.0-semantically-released",
   "private": false,
   "main": "dist/index.js",
