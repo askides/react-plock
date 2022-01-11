@@ -80,14 +80,14 @@ it("should apply the correct gap by default", () => {
   render(<Plock />);
 
   const element = screen.getByTestId("plock-container");
-  expect(element).toHaveStyle({ gap: "10px" });
+  expect(element).toHaveStyle({ columnGap: "10px" });
 });
 
 it("should permit to override the default gap", () => {
   render(<Plock gap={20} />);
 
   const element = screen.getByTestId("plock-container");
-  expect(element).toHaveStyle({ gap: "20px" });
+  expect(element).toHaveStyle({ columnGap: "20px" });
 });
 
 it("should be possible to customize the styles of the main container using classes", () => {
