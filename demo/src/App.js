@@ -46,9 +46,11 @@ function App() {
           </a>
         </div>
         <Plock nColumns={3} gap={10}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <Tile key={i}>{i}</Tile>
-          ))}
+          {Array(101)
+            .fill(0)
+            .map((el, index) => (
+              <Tile key={index}>{index}</Tile>
+            ))}
         </Plock>
       </div>
     </div>
