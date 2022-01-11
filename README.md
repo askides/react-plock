@@ -25,6 +25,13 @@ The demo is available for you [here](https://react-plock.netlify.app/)!
 
 ### Getting Started 🤩
 
+Install the package with [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/):
+
+```bash
+$ yarn add react-plock
+$ npm install react-plock
+```
+
 The most simple way to use Plock is to import it in your React app:
 
 ```jsx
