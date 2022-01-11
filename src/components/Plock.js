@@ -27,12 +27,13 @@ export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
     mainGrid: {
       display: "grid",
       gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
-      gap: gap,
+      columnGap: gap,
+      alignItems: "start",
     },
     columnGrid: {
       display: "grid",
       gridTemplateColumns: "100%",
-      gap: gap,
+      rowGap: gap,
     },
   };
 
