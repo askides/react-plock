@@ -7,6 +7,7 @@
 <br/>
 
 <p align="center" style="padding-bottom:3rem">
+<img alt="Build Status" src="https://img.shields.io/github/workflow/status/itsrennyman/react-plock/Build%20CI?style=for-the-badge" />
 <img alt="Release" src="https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge" />
 <img alt="Stars" src="https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge" />
 <img alt="License" src="https://img.shields.io/github/license/itsrennyman/react-plock?style=for-the-badge" />
@@ -20,7 +21,7 @@ Plock is a responsive masonry layout implementation for React. Very simple to us
 
 ## Can I see a demo? 👀
 
-I'm working on a demo, please check back soon.
+The demo is available for you [here](https://react-plock.netlify.app/)!
 
 ### Getting Started 🤩
 
