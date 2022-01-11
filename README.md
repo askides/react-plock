@@ -35,6 +35,8 @@ $ npm install react-plock
 The most simple way to use Plock is to import it in your React app:
 
 ```jsx
+import { Plock } from 'react-plock';
+
 <Plock>
   <SuperComponent>I'm a super component! 😎</SuperComponent>
   <SuperComponent>I'm a super component too! 🤓</SuperComponent>
