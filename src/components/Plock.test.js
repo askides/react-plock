@@ -110,3 +110,18 @@ it("should not override the default styles", () => {
   const element = screen.getByTestId("plock-container");
   expect(element).toHaveStyle({ display: "grid" });
 });
+
+it("should be possibile to pass an object in the nColumns prop", () => {
+  const breakpoints = {
+    sm: { size: 640, columns: 1 },
+    md: { size: 768, columns: 2 },
+    lg: { size: 1024, columns: 3 },
+    xl: { size: 1280, columns: 4 },
+  };
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+});
