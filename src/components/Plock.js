@@ -6,12 +6,12 @@ const uuid = () => Math.random().toString(36).substring(2, 12);
  * Configuration for Plock.
  * This is a map of breakpoints to the number of columns to use for that breakpoint.
  *
- * const breakpoints = {
- *   sm: { size: 640, columns: 1 },
- *   md: { size: 768, columns: 2 },
- *   lg: { size: 1024, columns: 3 },
- *   xl: { size: 1280, columns: 4 },
- * };
+ * const breakpoints = [
+ *   { size: 640, columns: 1 },
+ *   { size: 768, columns: 2 },
+ *   { size: 1024, columns: 3 },
+ *   { size: 1280, columns: 4 },
+ * ];
  */
 
 export function useWindowWidth() {
@@ -36,20 +36,16 @@ export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
     if (typeof nColumns === "number") {
       columnsElements = Array.from({ length: nColumns }, (e) => []);
     } else {
-      // TODO: this is not correctly working
-      const closestWith = Object.keys(nColumns).reduce((prev, curr) => {
-        const { size } = nColumns[curr];
-        return Math.abs(size - width) < Math.abs(prev - width) ? size : prev;
-      }, 0);
+      let breakpoint = nColumns
+        .filter((el) => el.size <= width)
+        .sort((a, b) => a.size - b.size)
+        .pop();
 
-      const closest = Object.keys(nColumns).find(
-        (key) => nColumns[key].size === closestWith
-      );
+      if (!breakpoint) {
+        breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
+      }
 
-      columnsElements = Array.from(
-        { length: nColumns[closest].columns },
-        (e) => []
-      );
+      columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
     }
 
     React.Children.forEach(children, (child, index) => {
