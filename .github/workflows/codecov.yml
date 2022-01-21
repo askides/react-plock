@@ -1,0 +1,28 @@
+name: Codecov CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+
+      - name: Download Deps
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+
+      - name: Generate Coverage Report
+      - run: npm run test-ci -- --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
