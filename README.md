@@ -9,6 +9,7 @@
 <p align="center" style="padding-bottom:3rem">
 <img alt="Build Status" src="https://img.shields.io/github/workflow/status/itsrennyman/react-plock/Build%20CI?style=for-the-badge" />
 <img alt="Release" src="https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge" />
+<img alt="Coverage" src="https://img.shields.io/codecov/c/gh/itsrennyman/react-plock?style=for-the-badge" />
 <img alt="Stars" src="https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge" />
 <img alt="License" src="https://img.shields.io/github/license/itsrennyman/react-plock?style=for-the-badge" />
 </p>

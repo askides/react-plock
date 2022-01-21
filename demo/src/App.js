@@ -27,10 +27,10 @@ export function Github(props) {
 
 function App() {
   const breakpoints = [
-    { size: 640, columns: 1 },
-    { size: 768, columns: 2 },
-    { size: 1024, columns: 3 },
-    { size: 1280, columns: 4 },
+    { size: 640, columns: 2 },
+    { size: 768, columns: 3 },
+    { size: 1024, columns: 4 },
+    { size: 1280, columns: 5 },
   ];
 
   return (
