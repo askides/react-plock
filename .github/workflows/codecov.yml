@@ -22,7 +22,7 @@ jobs:
           useLockFile: false
 
       - name: Generate Coverage Report
-      - run: npm run test-ci -- --coverage
+        run: npm run test-ci -- --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
