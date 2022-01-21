@@ -2,13 +2,51 @@ import * as React from "react";
 
 const uuid = () => Math.random().toString(36).substring(2, 12);
 
+/**
+ * Configuration for Plock.
+ * This is a map of breakpoints to the number of columns to use for that breakpoint.
+ *
+ * const breakpoints = [
+ *   { size: 640, columns: 1 },
+ *   { size: 768, columns: 2 },
+ *   { size: 1024, columns: 3 },
+ *   { size: 1280, columns: 4 },
+ * ];
+ */
+
+export function useWindowWidth() {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+}
+
 export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
-  const [columns, setColumns] = React.useState(() => {
-    return Array.from({ length: nColumns }, (e) => []);
-  });
+  const width = useWindowWidth();
+  const [columns, setColumns] = React.useState([]);
 
   React.useLayoutEffect(() => {
-    const columnsElements = Array.from({ length: nColumns }, (e) => []);
+    let columnsElements = [];
+
+    if (typeof nColumns === "number") {
+      columnsElements = Array.from({ length: nColumns }, (e) => []);
+    } else {
+      let breakpoint = nColumns
+        .filter((el) => el.size <= width)
+        .sort((a, b) => a.size - b.size)
+        .pop();
+
+      if (!breakpoint) {
+        breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
+      }
+
+      columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
+    }
 
     React.Children.forEach(children, (child, index) => {
       const key = uuid();
@@ -17,16 +55,16 @@ export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
         key: key,
       });
 
-      columnsElements[index % nColumns].push(cloned);
+      columnsElements[index % columnsElements.length].push(cloned);
     });
 
     setColumns(columnsElements);
-  }, [children, nColumns, setColumns]);
+  }, [children, nColumns, setColumns, width]);
 
   const defaultStyles = {
     mainGrid: {
       display: "grid",
-      gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
+      gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
       columnGap: gap,
       alignItems: "start",
     },
