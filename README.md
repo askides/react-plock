@@ -32,52 +32,106 @@ $ yarn add react-plock
 $ npm install react-plock
 ```
 
-The most simple way to use Plock is to import it in your React app:
+The simplest way to use Plock is to import it in your React app:
 
 ```jsx
-<Plock>
-  <SuperComponent>I'm a super component! 😎</SuperComponent>
-  <SuperComponent>I'm a super component too! 🤓</SuperComponent>
-  <SuperComponent>Don't forget me! 😏</SuperComponent>
-</Plock>
+import { Plock } from "react-plock";
+
+export function Komponent() {
+  return (
+    <Plock>
+      <div>Sun is shining ☀️</div>
+      <div>Moon is shining 🌙</div>
+      <div>Stars are shining ✨</div>
+    </Plock>
+  );
+}
 ```
 
 And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with three columns. You can also override this prop by setting the `nColumns` prop:
 
 ```jsx
-<Plock nColumns={2}>
-  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
-  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
-  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
-  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
-</Plock>
+import { Plock } from "react-plock";
+
+const Tile = ({ children, style, ...rest }) => (
+  <div style={{ width: "100%", ...style }} {...rest}>
+    {children}
+  </div>
+);
+
+export function Komponent() {
+  return (
+    <Plock nColumns={2}>
+      <Tile>I love Plock! 💙</Tile>
+      <Tile>I love React! 💛</Tile>
+      <Tile>I love Javascript! 💝</Tile>
+      <Tile>Give us a Star! 🌟</Tile>
+    </Plock>
+  );
+}
+```
+
+If you need different breakpoints, you can use pass an array like this:
+
+```jsx
+import { Plock } from "react-plock";
+
+export function Komponent() {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  return (
+    <Plock nColumns={breakpoints}>
+      <div>Pikachu</div>
+      <div>Charmander</div>
+      <div>Squirtle</div>
+      <div>Bulbasaur</div>
+    </Plock>
+  );
+}
 ```
 
 Also the gap between columns can be set by setting the `gap` prop:
 
 ```jsx
-<Plock nColumns={3} gap={10}>
-  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
-  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
-  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
-  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
-</Plock>
+import { Plock } from "react-plock";
+
+export function Komponent() {
+  return (
+    <Plock nColumns={3} gap={10}>
+      <div>Pikachu</div>
+      <div>Charmander</div>
+      <div>Squirtle</div>
+      <div>Bulbasaur</div>
+    </Plock>
+  );
+}
 ```
 
 Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
 ```jsx
-<Plock style={{ background: "red" }} className="an-happy-class">
-  <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
-  <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
-  <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
-  <div style={{ height: 500, width: "100%", background: "orange" }}>4</div>
-</Plock>
+import { Plock } from "react-plock";
+
+export function Komponent() {
+  return (
+    <Plock style={{ background: "red" }} className="a-happy-class">
+      <div>Pikachu</div>
+      <div>Charmander</div>
+      <div>Squirtle</div>
+      <div>Bulbasaur</div>
+    </Plock>
+  );
+}
 ```
 
 ### Built With 🏗️
 
-- [ReactJS](https://reactjs.org/) - React
+- [ReactJS](https://reactjs.org/)
 
 ### Versioning 🚦
 
