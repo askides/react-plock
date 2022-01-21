@@ -139,7 +139,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ### Authors 🙋
 
-- **Renato Pozzi** - _Initial work_ - [itsrennyman](https://github.com/itsrennyman)
+- **Renato Pozzi** - [itsrennyman](https://github.com/itsrennyman)
 
 ### Stargazers 🌟
 
