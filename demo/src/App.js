@@ -26,28 +26,39 @@ export function Github(props) {
 }
 
 function App() {
+  const breakpoints = [
+    { size: 640, columns: 2 },
+    { size: 768, columns: 3 },
+    { size: 1024, columns: 4 },
+    { size: 1280, columns: 5 },
+  ];
+
   return (
-    <div className="min-h-screen bg-red-600">
+    <div className="min-h-screen bg-[#da2c38]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-          <div className="text-white space-y-5 py-10 sm:py-16">
-            <h1 className="text-6xl font-bold tracking-tight">React Plock</h1>
-            <p className="text-xl max-w-xl">
-              Plock is a responsive masonry layout implementation for React.
-              Very simple to use and easy to understand.
-            </p>
-          </div>
-          <div className="mb-16 sm:mb-0">
-            <a
-              href="https://github.com/itsrennyman/react-plock"
-              className="text-white justify-center font-medium outline-none px-4 py-3 rounded-md bg-gray-800 hover:ring ring-offset-4 ring-offset-red-600 ring-white transition-all duration-200 flex"
-            >
-              <Github className="w-6 h-6" />
-              <span className="pl-3">Star on Github!</span>
-            </a>
-          </div>
+        <div className="space-y-10 py-10 sm:py-12">
+          <h1 className="text-6xl sm:text-8xl font-bold tracking-tight text-[#f5fbef]">
+            React Plock
+          </h1>
+
+          <p className="text-3xl sm:text-5xl max-w-4xl font-bold text-[#0d1321] leading-tight sm:leading-tight">
+            Plock is a responsive{" "}
+            <span className="text-[#f5fbef]">masonry layout</span> package for{" "}
+            <span className="text-[#f5fbef]">React</span>
+          </p>
         </div>
-        <Plock nColumns={3} gap={10}>
+
+        <div className="mb-20 mt-0">
+          <a
+            href="https://github.com/itsrennyman/react-plock"
+            className="text-white sm:max-w-xs justify-center font-medium outline-none px-4 py-3 rounded-md bg-gray-800 hover:ring ring-offset-4 ring-offset-red-600 ring-white transition-all duration-200 flex"
+          >
+            <Github className="w-6 h-6" />
+            <span className="pl-3">See the Documentation</span>
+          </a>
+        </div>
+
+        <Plock nColumns={breakpoints} gap={10}>
           {Array(101)
             .fill(0)
             .map((el, index) => (

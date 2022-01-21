@@ -1,5 +1,19 @@
+import matchMediaPolyfill from "mq-polyfill";
 import { render, screen } from "@testing-library/react";
 import { Plock } from "./Plock";
+
+beforeAll(() => {
+  // resizeTo is not supported in JSDOM, so we need to polyfill it.
+  matchMediaPolyfill(window);
+  window.resizeTo = function resizeTo(width, height) {
+    Object.assign(this, {
+      innerWidth: width,
+      innerHeight: height,
+      outerWidth: width,
+      outerHeight: height,
+    }).dispatchEvent(new this.Event("resize"));
+  };
+});
 
 it("should render the container", () => {
   render(<Plock />);
@@ -109,4 +123,179 @@ it("should not override the default styles", () => {
 
   const element = screen.getByTestId("plock-container");
   expect(element).toHaveStyle({ display: "grid" });
+});
+
+it("should be possibile to pass an array in the nColumns prop", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+});
+
+it("should render one column with a 500px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(500, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(1);
+});
+
+it("should render one column with a 639px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(639, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(1);
+});
+
+it("should render two columns with a 768px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(768, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(2);
+});
+
+it("should render two columns with a 800px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(800, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(2);
+});
+
+it("should render two columns with a 1023px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(1023, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(2);
+});
+
+it("should render three columns with a 1024px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(1024, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(3);
+});
+
+it("should render six columns with a 1280px window", () => {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 768, columns: 2 },
+    { size: 1024, columns: 3 },
+    { size: 1280, columns: 6 },
+  ];
+
+  window.resizeTo(1280, 1000);
+
+  render(
+    <Plock nColumns={breakpoints}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  const columns = screen.getAllByTestId("plock-column");
+  expect(columns).toHaveLength(6);
+});
+
+it("should keep the default number of columns if a number is passed", () => {
+  render(
+    <Plock nColumns={3}>
+      <div>I am a child on plock!</div>
+    </Plock>
+  );
+
+  window.resizeTo(100, 1000);
+  expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
+
+  window.resizeTo(500, 1000);
+  expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
+
+  window.resizeTo(1000, 1000);
+  expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
+
+  window.resizeTo(2000, 1000);
+  expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 });
