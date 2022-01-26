@@ -28,15 +28,7 @@ export function useWindowWidth() {
 
 export const Plock = React.forwardRef(
   (
-    {
-      as: Comp = "div",
-      children,
-      className,
-      style,
-      nColumns = 3,
-      gap = 10,
-      ...rest
-    },
+    { as: Comp = "div", children, className, style, nColumns = 3, gap = 10 },
     forwardedRef
   ) => {
     const width = useWindowWidth();
