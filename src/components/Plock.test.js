@@ -1,5 +1,5 @@
 import matchMediaPolyfill from "mq-polyfill";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { Plock } from "./Plock";
 
 beforeAll(() => {
@@ -148,7 +148,9 @@ it("should render one column with a 500px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(500, 1000);
+  act(() => {
+    window.resizeTo(500, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -168,7 +170,9 @@ it("should render one column with a 639px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(639, 1000);
+  act(() => {
+    window.resizeTo(639, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -188,7 +192,9 @@ it("should render two columns with a 768px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(768, 1000);
+  act(() => {
+    window.resizeTo(768, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -208,7 +214,9 @@ it("should render two columns with a 800px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(800, 1000);
+  act(() => {
+    window.resizeTo(800, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -228,7 +236,9 @@ it("should render two columns with a 1023px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(1023, 1000);
+  act(() => {
+    window.resizeTo(1023, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -248,7 +258,9 @@ it("should render three columns with a 1024px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(1024, 1000);
+  act(() => {
+    window.resizeTo(1024, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -268,7 +280,9 @@ it("should render six columns with a 1280px window", () => {
     { size: 1280, columns: 6 },
   ];
 
-  window.resizeTo(1280, 1000);
+  act(() => {
+    window.resizeTo(1280, 1000);
+  });
 
   render(
     <Plock nColumns={breakpoints}>
@@ -287,16 +301,24 @@ it("should keep the default number of columns if a number is passed", () => {
     </Plock>
   );
 
-  window.resizeTo(100, 1000);
+  act(() => {
+    window.resizeTo(100, 1000);
+  });
   expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 
-  window.resizeTo(500, 1000);
+  act(() => {
+    window.resizeTo(500, 1000);
+  });
   expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 
-  window.resizeTo(1000, 1000);
+  act(() => {
+    window.resizeTo(1000, 1000);
+  });
   expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 
-  window.resizeTo(2000, 1000);
+  act(() => {
+    window.resizeTo(2000, 1000);
+  });
   expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 });
 
@@ -314,4 +336,12 @@ it("should be possible to override the container", () => {
   const element = screen.getByTestId("plock-container");
   expect(element).toBeInTheDocument();
   expect(element.tagName).toEqual("SECTION");
+});
+
+it("should have not the component class if i override it", () => {
+  const Component = (props) => <section className="sku" {...props} />;
+  render(<Plock as={Component} />);
+
+  const element = screen.getByTestId("plock-container");
+  expect(element).not.toHaveClass("sku");
 });
