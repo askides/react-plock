@@ -299,3 +299,19 @@ it("should keep the default number of columns if a number is passed", () => {
   window.resizeTo(2000, 1000);
   expect(screen.getAllByTestId("plock-column")).toHaveLength(3);
 });
+
+it("should be render a div as a container by default", () => {
+  render(<Plock />);
+
+  const element = screen.getByTestId("plock-container");
+  expect(element).toBeInTheDocument();
+  expect(element.tagName).toEqual("DIV");
+});
+
+it("should be possible to override the container", () => {
+  render(<Plock as="section" />);
+
+  const element = screen.getByTestId("plock-container");
+  expect(element).toBeInTheDocument();
+  expect(element.tagName).toEqual("SECTION");
+});

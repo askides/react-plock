@@ -26,72 +26,86 @@ export function useWindowWidth() {
   return width;
 }
 
-export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
-  const width = useWindowWidth();
-  const [columns, setColumns] = React.useState([]);
+export const Plock = React.forwardRef(
+  (
+    {
+      as: Comp = "div",
+      children,
+      className,
+      style,
+      nColumns = 3,
+      gap = 10,
+      ...rest
+    },
+    forwardedRef
+  ) => {
+    const width = useWindowWidth();
+    const [columns, setColumns] = React.useState([]);
 
-  React.useLayoutEffect(() => {
-    let columnsElements = [];
+    React.useLayoutEffect(() => {
+      let columnsElements = [];
 
-    if (typeof nColumns === "number") {
-      columnsElements = Array.from({ length: nColumns }, (e) => []);
-    } else {
-      let breakpoint = nColumns
-        .filter((el) => el.size <= width)
-        .sort((a, b) => a.size - b.size)
-        .pop();
+      if (typeof nColumns === "number") {
+        columnsElements = Array.from({ length: nColumns }, (e) => []);
+      } else {
+        let breakpoint = nColumns
+          .filter((el) => el.size <= width)
+          .sort((a, b) => a.size - b.size)
+          .pop();
 
-      if (!breakpoint) {
-        breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
+        if (!breakpoint) {
+          breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
+        }
+
+        columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
       }
 
-      columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
-    }
+      React.Children.forEach(children, (child, index) => {
+        const key = uuid();
+        const cloned = React.cloneElement(child, {
+          ...child.props,
+          key: key,
+        });
 
-    React.Children.forEach(children, (child, index) => {
-      const key = uuid();
-      const cloned = React.cloneElement(child, {
-        ...child.props,
-        key: key,
+        columnsElements[index % columnsElements.length].push(cloned);
       });
 
-      columnsElements[index % columnsElements.length].push(cloned);
-    });
+      setColumns(columnsElements);
+    }, [children, nColumns, setColumns, width]);
 
-    setColumns(columnsElements);
-  }, [children, nColumns, setColumns, width]);
+    const defaultStyles = {
+      mainGrid: {
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
+        columnGap: gap,
+        alignItems: "start",
+      },
+      columnGrid: {
+        display: "grid",
+        gridTemplateColumns: "100%",
+        rowGap: gap,
+      },
+    };
 
-  const defaultStyles = {
-    mainGrid: {
-      display: "grid",
-      gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
-      columnGap: gap,
-      alignItems: "start",
-    },
-    columnGrid: {
-      display: "grid",
-      gridTemplateColumns: "100%",
-      rowGap: gap,
-    },
-  };
-
-  return (
-    <div
-      data-testid="plock-container"
-      className={className}
-      style={{ style, ...defaultStyles.mainGrid }}
-    >
-      {columns.map((column, index) => {
-        return (
-          <div
-            data-testid="plock-column"
-            style={defaultStyles.columnGrid}
-            key={index}
-          >
-            {column}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+    return (
+      <Comp
+        ref={forwardedRef}
+        data-testid="plock-container"
+        className={className}
+        style={{ style, ...defaultStyles.mainGrid }}
+      >
+        {columns.map((column, index) => {
+          return (
+            <div
+              data-testid="plock-column"
+              style={defaultStyles.columnGrid}
+              key={index}
+            >
+              {column}
+            </div>
+          );
+        })}
+      </Comp>
+    );
+  }
+);
