@@ -1,7 +1,5 @@
 import * as React from "react";
 
-const uuid = () => Math.random().toString(36).substring(2, 12);
-
 /**
  * Configuration for Plock.
  * This is a map of breakpoints to the number of columns to use for that breakpoint.
@@ -53,7 +51,7 @@ export const Plock = React.forwardRef(
       }
 
       React.Children.forEach(children, (child, index) => {
-        const key = uuid();
+        const key = `item-${index}`;
         const cloned = React.cloneElement(child, {
           ...child.props,
           key: key,
