@@ -96,6 +96,8 @@ export function Komponent() {
 }
 ```
 
+> Note: The element resizing is automatically debounced with a delay of 200ms. You can override this delay by setting the `debounce` prop with a number in milliseconds.
+
 Also the gap between columns can be set by setting the `gap` prop:
 
 ```jsx

@@ -1,7 +1,5 @@
 import * as React from "react";
 
-const uuid = () => Math.random().toString(36).substring(2, 12);
-
 /**
  * Configuration for Plock.
  * This is a map of breakpoints to the number of columns to use for that breakpoint.
@@ -14,84 +12,126 @@ const uuid = () => Math.random().toString(36).substring(2, 12);
  * ];
  */
 
-export function useWindowWidth() {
+export function useWindowWidth({ debounceMs }) {
   const [width, setWidth] = React.useState(window.innerWidth);
+  const handleResize = useDebounce(
+    () => setWidth(window.innerWidth),
+    debounceMs
+  );
 
   React.useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   return width;
 }
 
-export function Plock({ children, className, style, nColumns = 3, gap = 10 }) {
-  const width = useWindowWidth();
-  const [columns, setColumns] = React.useState([]);
+export function useDebounce(fn, ms) {
+  let timeout = null;
 
-  React.useLayoutEffect(() => {
-    let columnsElements = [];
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(args), ms);
+  };
+}
 
-    if (typeof nColumns === "number") {
-      columnsElements = Array.from({ length: nColumns }, (e) => []);
-    } else {
-      let breakpoint = nColumns
-        .filter((el) => el.size <= width)
-        .sort((a, b) => a.size - b.size)
-        .pop();
+export const Plock = React.forwardRef(
+  (
+    {
+      as: Comp = "div",
+      children,
+      className,
+      style,
+      gap = 10,
+      debounce = 200,
 
-      if (!breakpoint) {
-        breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
-      }
+      /**
+       * TODO:
+       * This will be renamed to breakpoints in a future major release!
+       */
+      nColumns: breakpoints = 3,
+    },
+    forwardedRef
+  ) => {
+    const width = useWindowWidth({ debounceMs: debounce });
+    const [columns, setColumns] = React.useState([]);
 
-      columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
-    }
+    React.useLayoutEffect(() => {
+      const first = (breakpoints) => {
+        return breakpoints?.[0];
+      };
 
-    React.Children.forEach(children, (child, index) => {
-      const key = uuid();
-      const cloned = React.cloneElement(child, {
-        ...child.props,
-        key: key,
+      const last = (breakpoints) => {
+        return breakpoints?.[breakpoints.length - 1];
+      };
+
+      const sorted = (breakpoints) => {
+        return breakpoints.sort((a, b) => a.size - b.size);
+      };
+
+      const contained = (breakpoints, width) => {
+        return breakpoints.filter((el) => el.size <= width);
+      };
+
+      const isNumber = (element) => typeof element === "number";
+
+      const breakpoint = isNumber(breakpoints)
+        ? { columns: breakpoints }
+        : last(sorted(contained(breakpoints, width))) ??
+          first(sorted(breakpoints));
+
+      const columnsForBreakpoint = Array.from(
+        { length: breakpoint.columns },
+        (e) => []
+      );
+
+      React.Children.forEach(children, (child, index) => {
+        const key = `item-${index}`;
+        const cloned = React.cloneElement(child, {
+          ...child.props,
+          key: key,
+        });
+
+        columnsForBreakpoint[index % columnsForBreakpoint.length].push(cloned);
       });
 
-      columnsElements[index % columnsElements.length].push(cloned);
-    });
+      setColumns(columnsForBreakpoint);
+    }, [children, breakpoints, width]);
 
-    setColumns(columnsElements);
-  }, [children, nColumns, setColumns, width]);
+    const defaultStyles = {
+      mainGrid: {
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
+        columnGap: gap,
+        alignItems: "start",
+      },
+      columnGrid: {
+        display: "grid",
+        gridTemplateColumns: "100%",
+        rowGap: gap,
+      },
+    };
 
-  const defaultStyles = {
-    mainGrid: {
-      display: "grid",
-      gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
-      columnGap: gap,
-      alignItems: "start",
-    },
-    columnGrid: {
-      display: "grid",
-      gridTemplateColumns: "100%",
-      rowGap: gap,
-    },
-  };
-
-  return (
-    <div
-      data-testid="plock-container"
-      className={className}
-      style={{ style, ...defaultStyles.mainGrid }}
-    >
-      {columns.map((column, index) => {
-        return (
-          <div
-            data-testid="plock-column"
-            style={defaultStyles.columnGrid}
-            key={index}
-          >
-            {column}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+    return (
+      <Comp
+        ref={forwardedRef}
+        data-testid="plock-container"
+        className={className}
+        style={{ style, ...defaultStyles.mainGrid }}
+      >
+        {columns.map((column, index) => {
+          return (
+            <div
+              data-testid="plock-column"
+              style={defaultStyles.columnGrid}
+              key={index}
+            >
+              {column}
+            </div>
+          );
+        })}
+      </Comp>
+    );
+  }
+);
