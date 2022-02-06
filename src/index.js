@@ -8,6 +8,7 @@ function App() {
     { size: 768, columns: 2 },
     { size: 1024, columns: 3 },
     { size: 1280, columns: 6 },
+    { size: 1680, columns: 8 },
   ];
 
   return (
