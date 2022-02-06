@@ -12,7 +12,7 @@ function App() {
   ];
 
   return (
-    <Plock gap={20} nColumns={configuration}>
+    <Plock gap={20} nColumns={configuration} debounce={200}>
       <div style={{ height: 100, width: "100%", background: "yellow" }}>1</div>
       <div style={{ height: 200, width: "100%", background: "blue" }}>2</div>
       <div style={{ height: 150, width: "100%", background: "red" }}>3</div>
