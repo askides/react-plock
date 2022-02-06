@@ -12,16 +12,28 @@ import * as React from "react";
  * ];
  */
 
-export function useWindowWidth() {
+export function useWindowWidth({ debounceMs }) {
   const [width, setWidth] = React.useState(window.innerWidth);
+  const handleResize = useDebounce(
+    () => setWidth(window.innerWidth),
+    debounceMs
+  );
 
   React.useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   return width;
+}
+
+export function useDebounce(fn, ms) {
+  let timeout = null;
+
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(args), ms);
+  };
 }
 
 export const Plock = React.forwardRef(
@@ -32,6 +44,7 @@ export const Plock = React.forwardRef(
       className,
       style,
       gap = 10,
+      debounce = 200,
 
       /**
        * TODO:
@@ -41,7 +54,7 @@ export const Plock = React.forwardRef(
     },
     forwardedRef
   ) => {
-    const width = useWindowWidth();
+    const width = useWindowWidth({ debounceMs: debounce });
     const [columns, setColumns] = React.useState([]);
 
     React.useLayoutEffect(() => {
