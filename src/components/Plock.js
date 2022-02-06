@@ -26,29 +26,52 @@ export function useWindowWidth() {
 
 export const Plock = React.forwardRef(
   (
-    { as: Comp = "div", children, className, style, nColumns = 3, gap = 10 },
+    {
+      as: Comp = "div",
+      children,
+      className,
+      style,
+      gap = 10,
+
+      /**
+       * TODO:
+       * This will be renamed to breakpoints in a future major release!
+       */
+      nColumns: breakpoints = 3,
+    },
     forwardedRef
   ) => {
     const width = useWindowWidth();
     const [columns, setColumns] = React.useState([]);
 
     React.useLayoutEffect(() => {
-      let columnsElements = [];
+      const first = (breakpoints) => {
+        return breakpoints?.[0];
+      };
 
-      if (typeof nColumns === "number") {
-        columnsElements = Array.from({ length: nColumns }, (e) => []);
-      } else {
-        let breakpoint = nColumns
-          .filter((el) => el.size <= width)
-          .sort((a, b) => a.size - b.size)
-          .pop();
+      const last = (breakpoints) => {
+        return breakpoints?.[breakpoints.length - 1];
+      };
 
-        if (!breakpoint) {
-          breakpoint = nColumns.sort((a, b) => a.size - b.size)[0];
-        }
+      const sorted = (breakpoints) => {
+        return breakpoints.sort((a, b) => a.size - b.size);
+      };
 
-        columnsElements = Array.from({ length: breakpoint.columns }, (e) => []);
-      }
+      const contained = (breakpoints, width) => {
+        return breakpoints.filter((el) => el.size <= width);
+      };
+
+      const isNumber = (element) => typeof element === "number";
+
+      const breakpoint = isNumber(breakpoints)
+        ? { columns: breakpoints }
+        : last(sorted(contained(breakpoints, width))) ??
+          first(sorted(breakpoints));
+
+      const columnsForBreakpoint = Array.from(
+        { length: breakpoint.columns },
+        (e) => []
+      );
 
       React.Children.forEach(children, (child, index) => {
         const key = `item-${index}`;
@@ -57,11 +80,11 @@ export const Plock = React.forwardRef(
           key: key,
         });
 
-        columnsElements[index % columnsElements.length].push(cloned);
+        columnsForBreakpoint[index % columnsForBreakpoint.length].push(cloned);
       });
 
-      setColumns(columnsElements);
-    }, [children, nColumns, setColumns, width]);
+      setColumns(columnsForBreakpoint);
+    }, [children, breakpoints, width]);
 
     const defaultStyles = {
       mainGrid: {
