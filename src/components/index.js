@@ -1,3 +1,1 @@
-import { Plock } from "./Plock";
-
-export { Plock };
+export * from "./Plock";
