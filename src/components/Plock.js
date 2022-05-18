@@ -12,16 +12,21 @@ import * as React from "react";
  * ];
  */
 
+// Check if window is defined (so if in the browser or in node.js).
+const isBrowser = typeof window !== "undefined";
+
 export function useWindowWidth({ debounceMs }) {
-  const [width, setWidth] = React.useState(window.innerWidth);
+  const [width, setWidth] = React.useState(isBrowser ? window.innerWidth : 0);
   const handleResize = useDebounce(
-    () => setWidth(window.innerWidth),
+    () => setWidth(isBrowser ? window.innerWidth : 0),
     debounceMs
   );
 
   React.useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    if (isBrowser) {
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, [handleResize]);
 
   return width;
