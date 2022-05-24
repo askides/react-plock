@@ -1,1 +1,1 @@
-export * from './lib/plock';
+export * from './lib/Plock';
