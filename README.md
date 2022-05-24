@@ -1,7 +1,3 @@
-<img src="public/header.png" />
-
-<hr/>
-
 ![Stars](https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge)
 ![Latest Release](https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge)
 
