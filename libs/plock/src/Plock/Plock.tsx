@@ -1,18 +1,8 @@
 import { uniqueId } from 'lodash';
 import * as React from 'react';
-import styled from 'styled-components';
-import { useWindowWidth } from './use-window-width';
-
-interface Props extends React.ComponentPropsWithoutRef<'div'> {
-  gap?: string;
-  debounce?: number;
-  breakpoints?: Breakpoint[];
-}
-
-interface Breakpoint {
-  size: number;
-  columns: number;
-}
+import { useWindowWidth } from '../hooks/use-window-width';
+import { Masonry, MasonryColumn } from '../Masonry';
+import { Breakpoint, PlockProps } from './Plock.types';
 
 const first = (breakpoints: Breakpoint[]): Breakpoint => {
   return breakpoints[0];
@@ -49,35 +39,13 @@ const DEFAULT_BREAKPOINTS = [
   { size: 1280, columns: 4 },
 ];
 
-interface MasonryProps {
-  columns: number;
-  gap: string;
-}
-
-const Masonry = styled.div<MasonryProps>`
-  display: grid;
-  grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
-  column-gap: ${({ gap }) => gap};
-  align-items: start;
-`;
-
-interface MasonryColumnProps {
-  gap: string;
-}
-
-const MasonryColumn = styled.div<MasonryColumnProps>`
-  display: grid;
-  grid-template-columns: '100%';
-  row-gap: ${({ gap }) => gap};
-`;
-
 const Plock = ({
   children,
   gap = '10px',
   debounce = 200,
   breakpoints = DEFAULT_BREAKPOINTS,
   ...props
-}: Props) => {
+}: PlockProps) => {
   const width = useWindowWidth({ debounceMs: debounce });
   const [columns, setColumns] = React.useState<[React.ReactElement[]?]>([]);
 
@@ -104,7 +72,7 @@ const Plock = ({
     <Masonry columns={columns.length} gap={gap} {...props}>
       {columns.map((column, index) => {
         return (
-          <MasonryColumn gap={gap} key={index}>
+          <MasonryColumn gap={gap} key={index} data-testid="masonry-column">
             {column}
           </MasonryColumn>
         );

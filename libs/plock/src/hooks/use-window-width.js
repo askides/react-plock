@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { isBrowser } from '../utils';
 import { useDebounce } from './use-debounce';
-import { isBrowser } from './utils';
 
 export function useWindowWidth({ debounceMs }) {
   const [width, setWidth] = React.useState(isBrowser ? window.innerWidth : 0);

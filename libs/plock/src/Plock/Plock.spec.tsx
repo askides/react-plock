@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { Plock } from './plock';
+import { Plock } from './Plock';
 
 test('should render without crashing', () => {
   render(<Plock data-testid="masonry" />);
@@ -17,6 +17,27 @@ it('should render the children', () => {
 
   const element = screen.getByText('I am a child on plock!');
   expect(element).toBeInTheDocument();
+});
+
+it('should render two columns', () => {
+  const breakpoints = [{ size: 0, columns: 2 }];
+  render(<Plock breakpoints={breakpoints} />);
+  const elements = screen.getAllByTestId('masonry-column');
+  expect(elements).toHaveLength(2);
+});
+
+it('should render three columns', () => {
+  const breakpoints = [{ size: 0, columns: 3 }];
+  render(<Plock breakpoints={breakpoints} />);
+  const elements = screen.getAllByTestId('masonry-column');
+  expect(elements).toHaveLength(3);
+});
+
+it('should render ten columns', () => {
+  const breakpoints = [{ size: 0, columns: 10 }];
+  render(<Plock breakpoints={breakpoints} />);
+  const elements = screen.getAllByTestId('masonry-column');
+  expect(elements).toHaveLength(10);
 });
 
 it('should apply the correct gap by default', () => {
