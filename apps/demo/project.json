@@ -15,7 +15,7 @@
         "main": "apps/demo/src/main.tsx",
         "polyfills": "apps/demo/src/polyfills.ts",
         "tsConfig": "apps/demo/tsconfig.app.json",
-        "assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"],
+        "assets": [],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -28,12 +28,7 @@
           "vendorChunk": true
         },
         "production": {
-          "fileReplacements": [
-            {
-              "replace": "apps/demo/src/environments/environment.ts",
-              "with": "apps/demo/src/environments/environment.prod.ts"
-            }
-          ],
+          "fileReplacements": [],
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,

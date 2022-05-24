@@ -1,90 +1,149 @@
-# react-plock
+<img src="public/header.png" />
 
-This project was generated using [Nx](https://nx.dev).
+<hr/>
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+![Stars](https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge)
+![Latest Release](https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge)
 
-🔎 **Smart, Fast and Extensible Build System**
+# About Plock 🌈
 
-## Adding capabilities to your workspace
+Plock is a responsive masonry layout implementation for React. Very simple to use and easy to understand.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Can I see a demo? 👀
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+The demo is available for you [here](https://react-plock.netlify.app/)!
 
-Below are our core plugins:
+### Getting Started 🤩
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+Install the package with [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/):
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+```bash
+$ npm install react-plock
+```
 
-## Generate an application
+The simplest way to use Plock is to import it in your React app:
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+```jsx
+import { Plock } from 'react-plock';
 
-> You can use any of the plugins above to generate applications as well.
+export function Weather() {
+  return (
+    <Plock>
+      <div>Sun is shining ☀️</div>
+      <div>Moon is shining 🌙</div>
+      <div>Stars are shining ✨</div>
+    </Plock>
+  );
+}
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with this configuration:
 
-## Generate a library
+```jsx
+const default = [
+  { size: 640, columns: 1 },
+  { size: 768, columns: 2 },
+  { size: 1024, columns: 3 },
+  { size: 1280, columns: 6 },
+];
+```
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+You can also override this prop by setting the `breakpoints` prop:
 
-> You can also use any of the plugins above to generate libraries as well.
+```jsx
+import { Plock } from 'react-plock';
 
-Libraries are shareable across libraries and applications. They can be imported from `@react-plock/mylib`.
+const Tile = ({ children, style, ...rest }) => (
+  <div style={{ width: '100%', ...style }} {...rest}>
+    {children}
+  </div>
+);
 
-## Development server
+export function Loving() {
+  const breakpoints = [
+    { size: 640, columns: 1 },
+    { size: 1024, columns: 3 },
+  ];
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+  return (
+    <Plock breakpoints={breakpoints}>
+      <Tile>I love Plock! 💙</Tile>
+      <Tile>I love React! 💛</Tile>
+      <Tile>I love Javascript! 💝</Tile>
+      <Tile>Give us a Star! 🌟</Tile>
+    </Plock>
+  );
+}
+```
 
-## Code scaffolding
+> Note: The element resizing is automatically debounced with a delay of 200ms. You can override this delay by setting the `debounce` prop with a number in milliseconds.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+```jsx
+import { Plock } from 'react-plock';
 
-## Build
+export function WeatherDebounced() {
+  return (
+    <Plock debounce={1000}>
+      <div>Sun is shining ☀️</div>
+      <div>Moon is shining 🌙</div>
+      <div>Stars are shining ✨</div>
+    </Plock>
+  );
+}
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Also the gap between columns can be set by setting the `gap` prop (by default it's `10px`):
 
-## Running unit tests
+```jsx
+import { Plock } from 'react-plock';
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+export function Komponent() {
+  return (
+    <Plock gap="1rem">
+      <div>Pikachu</div>
+      <div>Charmander</div>
+      <div>Squirtle</div>
+      <div>Bulbasaur</div>
+    </Plock>
+  );
+}
+```
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
-## Running end-to-end tests
+```jsx
+import { Plock } from 'react-plock';
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+export function Komponent() {
+  return (
+    <Plock style={{ background: 'red' }} className="a-happy-class">
+      <div>Pikachu</div>
+      <div>Charmander</div>
+      <div>Squirtle</div>
+      <div>Bulbasaur</div>
+    </Plock>
+  );
+}
+```
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+### Built With 🏗️
 
-## Understand your workspace
+- [ReactJS](https://reactjs.org/)
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+### Versioning 🚦
 
-## Further help
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/itsrennyman/react-plock/tags).
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+### Authors 🙋
 
-## ☁ Nx Cloud
+- **Renato Pozzi** - [itsrennyman](https://github.com/itsrennyman)
 
-### Distributed Computation Caching & Distributed Task Execution
+### Stargazers 🌟
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+[![Stargazers repo roster for @itsrennyman/react-plock](https://reporoster.com/stars/itsrennyman/react-plock)](https://github.com/itsrennyman/react-plock/stargazers)
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+See also the list of [contributors](https://github.com/itsrennyman/react-plock/contributors) who participated in this project.
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+### License
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
