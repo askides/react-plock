@@ -1,9 +1,10 @@
 import { uniqueId } from 'lodash';
 import * as React from 'react';
+import styled from 'styled-components';
 import { useWindowWidth } from './use-window-width';
 
 interface Props extends React.ComponentPropsWithoutRef<'div'> {
-  gap?: number;
+  gap?: string;
   debounce?: number;
   breakpoints?: Breakpoint[];
 }
@@ -48,21 +49,31 @@ const DEFAULT_BREAKPOINTS = [
   { size: 1280, columns: 4 },
 ];
 
-// interface MasonryProps {
-//   columns: [];
-//   gap: number;
-// }
+interface MasonryProps {
+  columns: number;
+  gap: string;
+}
 
-// const Masonry = styled.div<MasonryProps>`
-//   display: 'grid';
-//   grid-template-columns: 'repeat(${(props) => props.columns.length}, 1fr)';
-//   column-gap: ${({ gap }) => gap};
-//   align-items: 'start';
-// `;
+const Masonry = styled.div<MasonryProps>`
+  display: grid;
+  grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
+  column-gap: ${({ gap }) => gap};
+  align-items: start;
+`;
+
+interface MasonryColumnProps {
+  gap: string;
+}
+
+const MasonryColumn = styled.div<MasonryColumnProps>`
+  display: grid;
+  grid-template-columns: '100%';
+  row-gap: ${({ gap }) => gap};
+`;
 
 const Plock = ({
   children,
-  gap = 10,
+  gap = '10px',
   debounce = 200,
   breakpoints = DEFAULT_BREAKPOINTS,
   ...props
@@ -89,34 +100,16 @@ const Plock = ({
     setColumns(calculated);
   }, [children, breakpoints, width]);
 
-  const defaultStyles = {
-    mainGrid: {
-      display: 'grid',
-      gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
-      columnGap: gap,
-      alignItems: 'start',
-    },
-    columnGrid: {
-      display: 'grid',
-      gridTemplateColumns: '100%',
-      rowGap: gap,
-    },
-  };
-
   return (
-    <div {...props} style={{ ...props.style, ...defaultStyles.mainGrid }}>
+    <Masonry columns={columns.length} gap={gap} {...props}>
       {columns.map((column, index) => {
         return (
-          <div
-            data-testid="plock-column"
-            style={defaultStyles.columnGrid}
-            key={index}
-          >
+          <MasonryColumn gap={gap} key={index}>
             {column}
-          </div>
+          </MasonryColumn>
         );
       })}
-    </div>
+    </Masonry>
   );
 };
 

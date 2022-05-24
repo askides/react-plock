@@ -17,7 +17,7 @@ export function Tile({ children }: { children: React.ReactNode }) {
 export function App() {
   return (
     <StyledApp>
-      <Plock gap={10}>
+      <Plock gap="10px">
         {Array(101)
           .fill(0)
           .map((el, index) => (
