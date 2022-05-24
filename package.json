@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-is": "18.1.0",
@@ -26,8 +27,10 @@
     "@nrwl/react": "14.1.8",
     "@nrwl/web": "14.1.8",
     "@nrwl/workspace": "14.1.8",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "13.1.1",
     "@types/jest": "27.4.1",
+    "@types/lodash": "^4.14.182",
     "@types/node": "16.11.7",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",
