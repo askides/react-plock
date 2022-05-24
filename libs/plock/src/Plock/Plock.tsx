@@ -53,7 +53,7 @@ const Plock = ({
   const [columns, setColumns] = React.useState<[React.ReactElement[]?]>([]);
 
   useSafeLayoutEffect(() => {
-    const calculated = calculateColumns(breakpoints, width);
+    const calculated = calculateColumns(breakpoints, width || 0);
 
     React.Children.forEach(children, (child, index) => {
       const key = uniqueId('plock-item-');
