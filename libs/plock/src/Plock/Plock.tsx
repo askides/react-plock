@@ -2,6 +2,7 @@ import { uniqueId } from 'lodash';
 import * as React from 'react';
 import { useWindowWidth } from '../hooks/use-window-width';
 import { Masonry, MasonryColumn } from '../Masonry';
+import { isBrowser } from '../utils';
 import { Breakpoint, PlockProps } from './Plock.types';
 
 const first = (breakpoints: Breakpoint[]): Breakpoint => {
@@ -32,6 +33,8 @@ const calculateColumns = (breakpoints: Breakpoint[], width: number) => {
   ];
 };
 
+const useSafeLayoutEffect = isBrowser ? React.useLayoutEffect : React.useEffect;
+
 const DEFAULT_BREAKPOINTS = [
   { size: 640, columns: 1 },
   { size: 768, columns: 2 },
@@ -49,7 +52,7 @@ const Plock = ({
   const width = useWindowWidth({ debounceMs: debounce });
   const [columns, setColumns] = React.useState<[React.ReactElement[]?]>([]);
 
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     const calculated = calculateColumns(breakpoints, width);
 
     React.Children.forEach(children, (child, index) => {
