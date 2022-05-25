@@ -40,6 +40,10 @@ const Tiled = styled.div<{ height: number; backgroundColor: string }>`
   font-weight: 700;
   font-family: 'Roboto', sans-serif;
   color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 2.5em;
+  }
 `;
 
 const Hero = styled.div`
