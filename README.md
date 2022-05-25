@@ -1,20 +1,5 @@
-<br/>
-
-<p align="center">
-<img src="public/header.png" />
-</p>
-
-<br/>
-
-<p align="center" style="padding-bottom:3rem">
-<img alt="Build Status" src="https://img.shields.io/github/workflow/status/itsrennyman/react-plock/Build%20CI?style=for-the-badge" />
-<img alt="Release" src="https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge" />
-<img alt="Coverage" src="https://img.shields.io/codecov/c/gh/itsrennyman/react-plock?style=for-the-badge" />
-<img alt="Stars" src="https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge" />
-<img alt="License" src="https://img.shields.io/github/license/itsrennyman/react-plock?style=for-the-badge" />
-</p>
-
-<br/>
+![Stars](https://img.shields.io/github/stars/itsrennyman/react-plock?style=for-the-badge)
+![Latest Release](https://img.shields.io/github/v/release/itsrennyman/react-plock?style=for-the-badge)
 
 # About Plock 🌈
 
@@ -29,40 +14,85 @@ The demo is available for you [here](https://react-plock.netlify.app/)!
 Install the package with [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/):
 
 ```bash
-$ yarn add react-plock
 $ npm install react-plock
 ```
 
 The simplest way to use Plock is to import it in your React app:
 
 ```jsx
-import { Plock } from "react-plock";
+import { Plock } from 'react-plock';
 
-export function Komponent() {
+export function Pokemon() {
   return (
     <Plock>
-      <div>Sun is shining ☀️</div>
-      <div>Moon is shining 🌙</div>
-      <div>Stars are shining ✨</div>
+      <div>Bulbasaur</div>
+      <div>Ivysaur</div>
+      <div>Venusaur</div>
     </Plock>
   );
 }
 ```
 
-And that's it! 🎉 🎉 🎉 By default, Plock will use the `grid` layout with three columns. You can also override this prop by setting the `nColumns` prop:
+And that's it! 🎉 🎉 🎉
+
+By default, Plock will use this configuration:
 
 ```jsx
-import { Plock } from "react-plock";
+const default = [
+  { size: 640, columns: 1 },
+  { size: 768, columns: 2 },
+  { size: 1024, columns: 3 },
+  { size: 1280, columns: 6 },
+];
+```
 
-const Tile = ({ children, style, ...rest }) => (
-  <div style={{ width: "100%", ...style }} {...rest}>
-    {children}
-  </div>
-);
+You can also override this prop by setting the `breakpoints` prop:
 
-export function Komponent() {
+```tsx
+import { Plock, Breakpoint } from 'react-plock';
+
+// For TS Breakpoint is the type for this property
+const breakpoints: Breakpoint[] = [
+  { size: 640, columns: 1 },
+  { size: 1024, columns: 3 },
+];
+
+export function Pokemon() {
   return (
-    <Plock nColumns={2}>
+    <Plock breakpoints={breakpoints}>
+      <div>Bulbasaur</div>
+      <div>Ivysaur</div>
+      <div>Venusaur</div>
+    </Plock>
+  );
+}
+```
+
+You can use custom components as elements too:
+
+```jsx
+import { Plock } from 'react-plock';
+
+interface TileProps {
+  children: React.ReactNode;
+}
+
+const Tile = ({ children }: TileProps) => {
+  return (
+    <div
+      style={{
+        height: '350px',
+        background: '#ffeb3b',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export function Pokemon() {
+  return (
+    <Plock breakpoints={breakpoints}>
       <Tile>I love Plock! 💙</Tile>
       <Tile>I love React! 💛</Tile>
       <Tile>I love Javascript! 💝</Tile>
@@ -72,40 +102,30 @@ export function Komponent() {
 }
 ```
 
-If you need different breakpoints, you can use pass an array like this:
+> The element resizing is automatically debounced with a delay of 200ms. You can override this delay by setting the `debounce` prop with a number in milliseconds.
 
 ```jsx
-import { Plock } from "react-plock";
+import { Plock } from 'react-plock';
 
-export function Komponent() {
-  const breakpoints = [
-    { size: 640, columns: 1 },
-    { size: 768, columns: 2 },
-    { size: 1024, columns: 3 },
-    { size: 1280, columns: 6 },
-  ];
-
+export function Pokemon() {
   return (
-    <Plock nColumns={breakpoints}>
-      <div>Pikachu</div>
-      <div>Charmander</div>
-      <div>Squirtle</div>
+    <Plock debounce={1000}>
       <div>Bulbasaur</div>
+      <div>Ivysaur</div>
+      <div>Venusaur</div>
     </Plock>
   );
 }
 ```
 
-> Note: The element resizing is automatically debounced with a delay of 200ms. You can override this delay by setting the `debounce` prop with a number in milliseconds.
-
-Also the gap between columns can be set by setting the `gap` prop:
+Also the gap between columns can be set by setting the `gap` prop (by default it's `10px`):
 
 ```jsx
-import { Plock } from "react-plock";
+import { Plock } from 'react-plock';
 
-export function Komponent() {
+export function Pokemon() {
   return (
-    <Plock nColumns={3} gap={10}>
+    <Plock gap="1rem">
       <div>Pikachu</div>
       <div>Charmander</div>
       <div>Squirtle</div>
@@ -118,11 +138,11 @@ export function Komponent() {
 Needs also some extra styling? No problem, you can extend the default styles by setting the `style` or the `className` prop:
 
 ```jsx
-import { Plock } from "react-plock";
+import { Plock } from 'react-plock';
 
-export function Komponent() {
+export function Pokemon() {
   return (
-    <Plock style={{ background: "red" }} className="a-happy-class">
+    <Plock style={{ background: 'red' }} className="a-happy-class">
       <div>Pikachu</div>
       <div>Charmander</div>
       <div>Squirtle</div>
@@ -130,6 +150,14 @@ export function Komponent() {
     </Plock>
   );
 }
+```
+
+### TypeScript 🤓
+
+Plock is totally type-safe and you can use it with TypeScript too, you can import the types and use them in your code:
+
+```tsx
+import { Breakpoint, PlockProps } from 'react-plock';
 ```
 
 ### Built With 🏗️
