@@ -1,6 +1,5 @@
-import { debounce } from 'lodash';
 import * as React from 'react';
-import { isBrowser } from '../utils';
+import { debounce, isBrowser } from '../utils';
 
 interface Props {
   debounceMs: number;

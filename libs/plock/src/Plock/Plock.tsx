@@ -1,8 +1,7 @@
-import { uniqueId } from 'lodash';
 import * as React from 'react';
 import { useWindowWidth } from '../hooks/use-window-width';
 import { Masonry, MasonryColumn } from '../Masonry';
-import { isBrowser } from '../utils';
+import { isBrowser, uniqueId } from '../utils';
 import { Breakpoint, PlockProps } from './Plock.types';
 
 const first = (breakpoints: Breakpoint[]): Breakpoint => {
