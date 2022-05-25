@@ -1,10 +1,10 @@
-interface MasonryProps {
+interface MasonryProps extends React.ComponentPropsWithoutRef<'div'> {
   columns: number;
   gap: string;
   children: React.ReactNode;
 }
 
-const Masonry = ({ children, columns, gap }: MasonryProps) => {
+const Masonry = ({ children, columns, gap, ...props }: MasonryProps) => {
   return (
     <div
       style={{
@@ -13,18 +13,19 @@ const Masonry = ({ children, columns, gap }: MasonryProps) => {
         columnGap: gap,
         alignItems: 'start',
       }}
+      {...props}
     >
       {children}
     </div>
   );
 };
 
-interface MasonryColumnProps {
+interface MasonryColumnProps extends React.ComponentPropsWithoutRef<'div'> {
   gap: string;
   children: React.ReactNode;
 }
 
-const MasonryColumn = ({ children, gap }: MasonryColumnProps) => {
+const MasonryColumn = ({ children, gap, ...props }: MasonryColumnProps) => {
   return (
     <div
       style={{
@@ -32,6 +33,7 @@ const MasonryColumn = ({ children, gap }: MasonryColumnProps) => {
         gridTemplateColumns: '100%',
         rowGap: gap,
       }}
+      {...props}
     >
       {children}
     </div>
