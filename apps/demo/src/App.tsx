@@ -91,6 +91,12 @@ export function Tile({ children }: { children: React.ReactNode }) {
   );
 }
 
+const breakpoints = [
+  { size: 768, columns: 3 },
+  { size: 1024, columns: 4 },
+  { size: 1280, columns: 5 },
+];
+
 const App = () => {
   return (
     <Container>
@@ -107,7 +113,7 @@ const App = () => {
           View On Github
         </MonoLink>
       </Hero>
-      <Plock gap="10px">
+      <Plock gap="10px" breakpoints={breakpoints}>
         {Array(101)
           .fill(0)
           .map((el, index) => (
