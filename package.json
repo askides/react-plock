@@ -8,7 +8,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lib:test": "lerna run test --scope react-plock",
-    "lib:build": "lerna run build --scope react-plock"
+    "lib:build": "lerna run build --scope react-plock",
+    "demo:dev": "lerna run dev --scope demo",
+    "demo:build": "lerna run build --scope demo"
   },
   "devDependencies": {
     "@types/node": "^18.14.4",
