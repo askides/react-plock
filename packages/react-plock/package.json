@@ -1,6 +1,6 @@
 {
   "name": "react-plock",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "The 1kB Masonry Grid for React",
   "author": "Renato Pozzi <renato.pozzi.dev@gmail.com>",
   "homepage": "https://github.com/itsrennyman/react-plock#readme",
@@ -29,9 +29,9 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "ts-jest": "^29.0.5",
-    "jest": "^29.4.3",
     "@types/jest": "^29.4.0",
-    "@types/react": "^18.0.28"
+    "@types/react": "^18.0.28",
+    "jest": "^29.4.3",
+    "ts-jest": "^29.0.5"
   }
 }
