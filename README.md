@@ -1,6 +1,6 @@
 # React Plock
 
-React Plock is an npm package that allows you to create amazing masonry layouts with an amazing developer experience. With React Plock, you can easily create responsive and customizable layouts that adapts to different screen sizes and devices.
+React Plock is an **ultra small** npm package (**less than 1kB**) that allows you to create amazing masonry layouts with an amazing developer experience. With React Plock, you can easily create responsive and customizable layouts that adapt to different screen sizes and devices.
 
 ### Features
 
