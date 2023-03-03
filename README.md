@@ -43,7 +43,7 @@ const ImagesMasonry = () => {
 Here's the TypeScript definition for the Masonry Component, below you can find a more detailed explanation.
 
 ```ts
-export type MasonryProps<T> = {
+export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
   config?: {
@@ -64,6 +64,10 @@ The masonry render prop. Here's where you define the styles of every tile of the
 #### Config
 
 A configuration object that is used to define the number of columns, media queries and other stuff.
+
+#### Other Props
+
+As you can see, by using `React.ComponentPropsWithoutRef<"div">` you can simply pass every available property to the div, some examples are: **id** and **className**. The only one property that will be overwritten will be the `style` because is used internally for the masonry generation.
 
 ### Important Note
 

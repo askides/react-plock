@@ -45,7 +45,7 @@ export function useMediaColumn(
   return index;
 }
 
-export type MasonryProps<T> = {
+export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
   config?: {
@@ -61,6 +61,7 @@ export function Masonry<T>({
     columns: [1, 2, 3, 4],
     media: [640, 768, 1024, 1280],
   },
+  ...rest
 }: MasonryProps<T>) {
   const columns = useMediaColumn(config.media, config.columns);
   const chunks = createChunks<T>(items, columns);
@@ -68,6 +69,7 @@ export function Masonry<T>({
 
   return (
     <div
+      {...rest}
       style={{
         display: "grid",
         alignItems: "start",
