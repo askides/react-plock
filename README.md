@@ -46,8 +46,9 @@ Here's the TypeScript definition for the Masonry Component, below you can find a
 export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
-  config?: {
-    columns?: number | number[];
+  config: {
+    columns: number | number[];
+    gap: number | number[];
     media?: number[];
   };
 };
@@ -63,42 +64,49 @@ The masonry render prop. Here's where you define the styles of every tile of the
 
 #### Config
 
-A configuration object that is used to define the number of columns, media queries and other stuff.
+A configuration object that is used to define the number of columns, media queries and gaps between items.
 
 #### Other Props
 
-As you can see, by using `React.ComponentPropsWithoutRef<"div">` you can simply pass every available property to the div, some examples are: **id** and **className**. The only one property that will be overwritten will be the `style` because is used internally for the masonry generation.
+As you can see, by using `React.ComponentPropsWithoutRef<"div">` you can simply pass every available property to the div, some examples are **id** and **className**. The only one property that will be overwritten will be the `style` because is used internally for the masonry generation.
 
 ### Important Note
 
-Please, note that in case you are passing an array to the columns attribute of the config property, the number of elements **MUST** be equal to the number of media breakpoints provided!
+Please, note that in case you are passing an array to the columns attribute of the config property, the number of elements **MUST** be equal to the number of media AND gap breakpoints provided!
 
 ```tsx
 // Correct: This will be responsive with 3 breakpoints.
 <Masonry
+  {...otherProps}
   config={{
     columns: [1, 2, 3],
+    gap: [12, 16, 20],
     media: [640, 768, 1024],
   }}
 />
 
 // Correct: This will be responsive with 2 breakpoints.
 <Masonry
+  {...otherProps}
   config={{
     columns: [1, 2],
+    gap: [2, 4],
     media: [640, 1024],
   }}
 />
 
 // Correct: This will be fixed with 4 columns in every screen size.
 <Masonry
+  {...otherProps}
   config={{
     columns: 4,
+    gap: 8
   }}
 />
 
 // NOT Correct: This will cause trouble in rendering.
 <Masonry
+  {...otherProps}
   config={{
     columns: [4],
     media: [640, 768],

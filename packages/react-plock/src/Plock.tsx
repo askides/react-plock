@@ -1,30 +1,34 @@
 import * as React from "react";
 
-export function useMediaColumn(
-  medias: number[] = [],
-  columns: number | number[] = 4
+export function useMediaValues(
+  medias: number[] | undefined,
+  columns: number[],
+  gap: number[]
 ) {
-  const [index, setIndex] = React.useState(1);
-
-  const mediaQueries = medias.map((media) =>
-    window.matchMedia(`(min-width: ${media}px)`)
-  );
+  const [values, setValues] = React.useState({ columns: 1, gap: 1 });
 
   React.useEffect(() => {
+    if (!medias) {
+      setValues({ columns: columns[0], gap: gap[0] });
+      return;
+    }
+
+    const mediaQueries = medias.map((media) =>
+      window.matchMedia(`(min-width: ${media}px)`)
+    );
+
     const onSizeChange = () => {
-      let idx = 0;
+      let matches = 0;
 
       mediaQueries.forEach((mediaQuery) => {
         if (mediaQuery.matches) {
-          idx++;
+          matches++;
         }
       });
 
-      if (Array.isArray(columns)) {
-        setIndex(columns[Math.min(mediaQueries.length - 1, Math.max(0, idx))]);
-      } else {
-        setIndex(columns);
-      }
+      // Update Values
+      const idx = Math.min(mediaQueries.length - 1, Math.max(0, matches));
+      setValues({ columns: columns[idx], gap: gap[idx] });
     };
 
     // Initial Call
@@ -40,30 +44,37 @@ export function useMediaColumn(
         mediaQuery.removeEventListener("change", onSizeChange);
       }
     };
-  }, [mediaQueries]);
+  }, [values.columns, values.gap]);
 
-  return index;
+  return values;
 }
 
 export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
-  config?: {
-    columns?: number | number[];
+  config: {
+    columns: number | number[];
+    gap: number | number[];
     media?: number[];
   };
 };
 
+export function createSafeArray(data: number | number[]) {
+  return Array.isArray(data) ? data : [data];
+}
+
 export function Masonry<T>({
   items = [],
   render,
-  config = {
-    columns: [1, 2, 3, 4],
-    media: [640, 768, 1024, 1280],
-  },
+  config,
   ...rest
 }: MasonryProps<T>) {
-  const columns = useMediaColumn(config.media, config.columns);
+  const { columns, gap } = useMediaValues(
+    config.media,
+    createSafeArray(config.columns),
+    createSafeArray(config.gap)
+  );
+
   const chunks = createChunks<T>(items, columns);
   const dataColumns = createDataColumns<T>(chunks, columns);
 
@@ -73,12 +84,12 @@ export function Masonry<T>({
       style={{
         display: "grid",
         alignItems: "start",
-        gridColumnGap: 24,
+        gridColumnGap: gap,
         gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr)`,
       }}
     >
       {dataColumns.map((column, idx) => (
-        <MasonryRow key={idx}>
+        <MasonryRow gap={gap} key={idx}>
           {column.map((item, idx) => render(item, idx))}
         </MasonryRow>
       ))}
@@ -86,12 +97,18 @@ export function Masonry<T>({
   );
 }
 
-export function MasonryRow({ children }: { children: React.ReactNode }) {
+export function MasonryRow({
+  children,
+  gap,
+}: {
+  children: React.ReactNode;
+  gap: number;
+}) {
   return (
     <div
       style={{
         display: "grid",
-        rowGap: 24,
+        rowGap: gap,
         gridTemplateColumns: "minmax(0, 1fr)",
       }}
     >
