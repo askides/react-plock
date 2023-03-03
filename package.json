@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "private": true,
+  "npmClient": "yarn",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "lib:test": "lerna run test --scope react-plock",
+    "lib:build": "lerna run build --scope react-plock"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.4",
+    "lerna": "^6.5.1",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5"
+  }
+}
