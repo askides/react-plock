@@ -27,11 +27,13 @@ const ImagesMasonry = () => {
   return (
     <Masonry
       items={items}
-      config={{ columns: [1, 2, 3], media: [640, 768, 1024] }}
+      config={{
+        columns: [1, 2, 3],
+        gap: [24, 12, 6],
+        media: [640, 768, 1024],
+      }}
       render={(item, idx) => (
-        <div key={idx} style={{ width: "100%" }}>
-          <img src={item} style={{ width: "100%", height: "auto" }} />
-        </div>
+        <img key={idx} src={item} style={{ width: "100%", height: "auto" }} />
       )}
     />
   );
