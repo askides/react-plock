@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set Current Branch
+        run: echo "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+
       - name: Bootstrap Dependencies
         run: npm run bootstrap
 
@@ -20,6 +23,6 @@ jobs:
 
       - name: Release Package
         run: |
-          if [ ${{ github.base_ref }} = dev ]; then
+          if [ ${{ env.CURRENT_BRANCH }} = dev ]; then
             npm run lib:bump:next
           fi
