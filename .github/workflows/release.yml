@@ -23,6 +23,9 @@ jobs:
 
       - name: Release Package
         run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
           if [ ${{ env.CURRENT_BRANCH }} = dev ]; then
             npm run lib:bump:next
           fi
