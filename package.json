@@ -11,6 +11,7 @@
     "lib:build": "lerna run build --scope react-plock",
     "lib:publish:next": "lerna publish from-package --dist-tag next",
     "lib:publish:latest": "lerna publish from-package",
+    "lib:bump:next": "lerna version --conventional-commits --conventional-prerelease --preid beta --yes",
     "demo:dev": "lerna run dev --scope demo",
     "demo:build": "lerna run build --scope demo",
     "demo:preview": "lerna run preview --scope demo"
