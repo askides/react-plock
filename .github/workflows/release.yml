@@ -21,6 +21,10 @@ jobs:
       - name: Run Testing Suite
         run: npm run lib:test
 
+      - name: NPM Identity
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+
       - name: Release Package
         run: |
           git config user.name "${{ github.actor }}"
