@@ -9,8 +9,10 @@
     "bootstrap": "lerna bootstrap",
     "lib:test": "lerna run test --scope react-plock",
     "lib:build": "lerna run build --scope react-plock",
-    "lib:publish:next": "lerna publish from-package --dist-tag next",
-    "lib:publish:latest": "lerna publish from-package",
+    "lib:publish:next": "lerna publish from-package --dist-tag next --yes",
+    "lib:publish:latest": "lerna publish from-package --yes",
+    "lib:bump:next": "lerna version --conventional-commits --conventional-prerelease --preid beta -m \"chore(release): publish %s\" --yes",
+    "lib:bump:latest": "lerna version --conventional-commits --conventional-graduate -m \"chore(release): publish %s\" --yes",
     "demo:dev": "lerna run dev --scope demo",
     "demo:build": "lerna run build --scope demo",
     "demo:preview": "lerna run preview --scope demo"

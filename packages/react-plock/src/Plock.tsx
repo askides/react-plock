@@ -85,7 +85,7 @@ export function Masonry<T>({
         display: "grid",
         alignItems: "start",
         gridColumnGap: gap,
-        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr)`,
+        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
       }}
     >
       {dataColumns.map((column, idx) => (
