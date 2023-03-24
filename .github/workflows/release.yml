@@ -33,4 +33,7 @@ jobs:
           if [ ${{ env.CURRENT_BRANCH }} = dev ]; then
             npm run lib:bump:next
             npm run lib:publish:next
+          else if 
+            npm run lib:bump:latest
+            npm run lib:publish:latest
           fi
