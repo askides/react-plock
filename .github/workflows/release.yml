@@ -1,0 +1,25 @@
+name: Test & Release CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Bootstrap Dependencies
+        run: npm run bootstrap
+
+      - name: Run Testing Suite
+        run: npm run lib:test
+
+      - name: Release Package
+        run: |
+          if [ ${{ github.base_ref }} = dev ]; then
+            npm run lib:bump:next
+          fi

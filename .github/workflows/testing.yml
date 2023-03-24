@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-      - feat/v3
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   main:
@@ -18,4 +18,4 @@ jobs:
           fetch-depth: 0
 
       - run: npm run bootstrap
-      - run: npx run lib:test
+      - run: npm run lib:test
