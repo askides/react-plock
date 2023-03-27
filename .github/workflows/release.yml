@@ -30,6 +30,8 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
+          npm run lib:build
+
           if [ ${{ env.CURRENT_BRANCH }} = dev ]; then
             npm run lib:bump:next
             npm run lib:publish:next
