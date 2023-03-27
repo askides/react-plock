@@ -39,3 +39,5 @@ jobs:
             npm run lib:bump:latest
             npm run lib:publish:latest
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
