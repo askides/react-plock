@@ -1,4 +1,4 @@
-export const datasource = [
+export const images = [
   "https://images.unsplash.com/photo-1606542758304-820b04394ac2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc3ODU0NDQy&ixlib=rb-4.0.3&q=80&w=1080",
   "https://images.unsplash.com/photo-1611419010196-a360856fc42f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc3ODUzMjg2&ixlib=rb-4.0.3&q=80&w=1080",
   "https://images.unsplash.com/photo-1530919424169-4b95f917e937?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc3ODU0NDQ2&ixlib=rb-4.0.3&q=80&w=1080",

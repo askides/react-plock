@@ -1,10 +1,10 @@
-"use client";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { images } from "../../../assets/data/images";
+import { Masonry } from "../../../libs/react-plock";
 
-import { images } from "../../../../assets/data/images";
-import { Masonry } from "../../../../libs/react-plock";
-
-export default function Home() {
-  return (
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
     <Masonry
       items={images}
       config={{
@@ -21,5 +21,6 @@ export default function Home() {
         />
       )}
     />
-  );
-}
+    );
+  </React.StrictMode>
+);
