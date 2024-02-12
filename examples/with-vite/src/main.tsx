@@ -5,21 +5,23 @@ import ReactDOM from "react-dom/client";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Masonry
-      items={images}
-      config={{
-        columns: [1, 2, 3],
-        gap: [24, 12, 6],
-        media: [640, 1024, 1280],
-      }}
-      render={(item, idx) => (
-        <img
-          key={idx}
-          src={item}
-          loading="lazy"
-          style={{ width: "100%", height: "auto" }}
-        />
-      )}
-    />
+    <div style={{ margin: 0, background: "#000000" }}>
+      <Masonry
+        items={images}
+        config={{
+          columns: [1, 2, 3],
+          gap: [24, 12, 6],
+          media: [640, 1024, 1280],
+        }}
+        render={(item, idx) => (
+          <img
+            key={idx}
+            src={item}
+            loading="lazy"
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
+      />
+    </div>
   </React.StrictMode>
 );
