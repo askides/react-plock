@@ -2,8 +2,8 @@
   "name": "react-plock",
   "version": "3.0.2",
   "description": "The 1kB Masonry Grid for React",
-  "author": "Renato Pozzi <renato.pozzi.dev@gmail.com>",
-  "homepage": "https://github.com/itsrennyman/react-plock#readme",
+  "author": "Renato Pozzi <askides@proton.me>",
+  "homepage": "https://github.com/askides/react-plock#readme",
   "license": "ISC",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -16,14 +16,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itsrennyman/react-plock.git"
+    "url": "git+https://github.com/askides/react-plock.git"
   },
   "scripts": {
     "build": "tsup index.ts --dts --minify",
     "test": "jest"
   },
   "bugs": {
-    "url": "https://github.com/itsrennyman/react-plock/issues"
+    "url": "https://github.com/askides/react-plock/issues"
   },
   "peerDependencies": {
     "react": "^18.2.0"

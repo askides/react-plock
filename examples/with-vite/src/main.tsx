@@ -1,7 +1,7 @@
+import { images } from "@assets/data/images";
+import { Masonry } from "@local/lib";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { images } from "../../../assets/data/images";
-import { Masonry } from "../../../libs/react-plock";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -21,6 +21,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         />
       )}
     />
-    );
   </React.StrictMode>
 );

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "local": ["../../libs/react-plock/*"]
+      "@local/lib": ["../../libs/react-plock/index"],
+      "@assets/*": ["../../assets/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,7 +1,7 @@
 "use client";
 
-import { images } from "../../../../assets/data/images";
-import { Masonry } from "../../../../libs/react-plock";
+import { images } from "@assets/data/images";
+import { Masonry } from "@local/lib";
 
 export default function Home() {
   return (
@@ -13,10 +13,12 @@ export default function Home() {
         media: [640, 1024, 1280],
       }}
       render={(item, idx) => (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           key={idx}
           src={item}
           loading="lazy"
+          alt="Unsplash Image"
           style={{ width: "100%", height: "auto" }}
         />
       )}
