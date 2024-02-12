@@ -24,7 +24,7 @@
     "lib:bump:dev": "changelogen --bump --prerelease dev",
     "lib:publish": "changelogen --publish",
     "lib:publish:dev": "npm publish react-plock --tag dev",
-    "lib:release": "changelogen --release",
+    "lib:release": "semantic-release",
     "build": "tsup index.ts --dts --minify"
   },
   "bugs": {
@@ -38,6 +38,7 @@
     "@types/react": "^18.0.28",
     "changelogen": "^0.5.5",
     "jest": "^29.4.3",
+    "semantic-release": "^22.0.12",
     "ts-jest": "^29.0.5"
   }
 }
