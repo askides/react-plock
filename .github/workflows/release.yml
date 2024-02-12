@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
+      - name: Run Tests
+        run: pnpm run lib:test
+
       - name: Install dependencies
         run: pnpm run lib:build
 
