@@ -23,6 +23,7 @@
     "changelog": "changelogen",
     "lib:bump": "changelogen --bump",
     "lib:release": "changelogen --release",
+    "lib:release:canary": "changelogen --canary",
     "lib:publish": "changelogen --publish",
     "build": "tsup index.ts --dts --minify"
   },
