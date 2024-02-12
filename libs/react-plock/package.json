@@ -20,11 +20,10 @@
   },
   "scripts": {
     "test": "jest",
-    "changelog": "changelogen",
     "lib:bump": "changelogen --bump",
     "lib:release": "changelogen --release",
-    "lib:release:canary": "changelogen --canary",
-    "lib:publish": "changelogen --publish",
+    "lib:release:canary": "changelogen --release --canary",
+    "lib:publish:next": "changelogen --publish --publishTag next",
     "build": "tsup index.ts --dts --minify"
   },
   "bugs": {
