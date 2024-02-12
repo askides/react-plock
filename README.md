@@ -10,7 +10,7 @@ React Plock is a tree-shakeable **ultra small** npm package (**less than 1kB gzi
 - **TypeScript Ready**: Get the strength of type-safe languages.
 - **Amazing DX**: Easy to use and well-documented.
 
-### Examples
+### Examples
 
 - Using Next.js 14 (Server Components) [See Working Demo](https://react-plock-with-nextjs.vercel.app/)
 - Using ViteJS [See Working Demo](https://react-plock-with-vite.vercel.app/)
