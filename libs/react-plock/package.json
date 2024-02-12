@@ -19,9 +19,12 @@
     "url": "git+https://github.com/askides/react-plock.git"
   },
   "scripts": {
-    "build": "tsup index.ts --dts --minify",
+    "test": "jest",
     "changelog": "changelogen",
-    "test": "jest"
+    "lib:bump": "changelogen --bump",
+    "lib:release": "changelogen --release",
+    "lib:publish": "changelogen --publish",
+    "build": "tsup index.ts --dts --minify"
   },
   "bugs": {
     "url": "https://github.com/askides/react-plock/issues"
