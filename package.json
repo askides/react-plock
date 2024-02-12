@@ -4,7 +4,8 @@
   "scripts": {
     "lib:test": "pnpm --filter react-plock test",
     "lib:build": "pnpm --filter react-plock build",
-    "lib:release": "pnpm --filter react-plock lib:release"
+    "lib:release": "pnpm --filter react-plock lib:release",
+    "demo:build": "pnpm --filter with-vite build"
   },
   "devDependencies": {
     "@types/node": "^18.14.4",

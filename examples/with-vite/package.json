@@ -1,7 +1,7 @@
 {
-  "name": "demo",
+  "name": "with-vite",
   "private": true,
-  "version": "3.0.2",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
