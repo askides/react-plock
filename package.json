@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "lib:test": "pnpm --filter react-plock test",
-    "lib:build": "pnpm --filter react-plock build"
+    "lib:build": "pnpm --filter react-plock build",
+    "lib:release": "pnpm --filter react-plock lib:release"
   },
   "devDependencies": {
     "@types/node": "^18.14.4",

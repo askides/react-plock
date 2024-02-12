@@ -1,13 +1,13 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 
 export function useMediaValues(
   medias: number[] | undefined,
   columns: number[],
   gap: number[]
 ) {
-  const [values, setValues] = React.useState({ columns: 0, gap: 1 });
+  const [values, setValues] = useState({ columns: 0, gap: 1 });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!medias) {
       setValues({ columns: columns[0], gap: gap[0] });
       return;
