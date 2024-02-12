@@ -10,6 +10,11 @@ React Plock is a tree-shakeable **ultra small** npm package (**less than 1kB gzi
 - **TypeScript Ready**: Get the strength of type-safe languages.
 - **Amazing DX**: Easy to use and well-documented.
 
+### Examples
+
+- Using Next.js 14 (Server Components) [See Working Demo](https://react-plock-with-nextjs.vercel.app/)
+- Using ViteJS [See Working Demo](https://react-plock-with-vite.vercel.app/)
+
 ### Installation
 
 ```bash
@@ -21,7 +26,7 @@ npm install react-plock
 Using Plock with the new v3 APIs it's a piece of cake. Here's an example of how can you create an [Unsplash-Like](https://unsplash.com/) masonry grid. You can even see a demo of this example by clicking [here](https://react-plock.netlify.app/).
 
 ```tsx
-import { Masonry } from 'react-plock';
+import { Masonry } from "react-plock";
 
 const ImagesMasonry = () => {
   const items = [...imageUrls];
