@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react",
+    "esModuleInterop": true,
     "outDir": "./dist"
   },
   "include": ["./src", "index.ts"]
