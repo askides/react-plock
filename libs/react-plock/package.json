@@ -23,7 +23,7 @@
     "lib:bump": "changelogen --bump",
     "lib:bump:dev": "changelogen --bump --prerelease dev",
     "lib:publish": "changelogen --publish",
-    "lib:publish:dev": "changelogen --publish --publishTag dev",
+    "lib:publish:dev": "npm publish react-plock --tag dev",
     "lib:release": "changelogen --release",
     "build": "tsup index.ts --dts --minify"
   },
