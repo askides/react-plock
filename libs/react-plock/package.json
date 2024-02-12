@@ -1,6 +1,6 @@
 {
   "name": "react-plock",
-  "version": "3.0.3-0",
+  "version": "3.0.2",
   "description": "The 1kB Masonry Grid for React",
   "author": "Renato Pozzi <askides@proton.me>",
   "homepage": "https://github.com/askides/react-plock#readme",
@@ -22,7 +22,7 @@
     "test": "jest",
     "lib:bump": "changelogen --bump",
     "lib:bump:dev": "changelogen --bump --prerelease dev",
-    "lib:publish": "changelogen --publish --publishTag dev",
+    "lib:publish": "changelogen --publish",
     "lib:publish:dev": "changelogen --publish --publishTag dev",
     "lib:release": "changelogen --release",
     "build": "tsup index.ts --dts --minify"
