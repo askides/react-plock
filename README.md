@@ -2,8 +2,6 @@
 
 React Plock is a tree-shakeable **ultra small** npm package (**less than 1kB gzipped**) that allows you to create amazing masonry layouts with an amazing developer experience. With React Plock, you can easily create responsive and customizable layouts that adapt to different screen sizes and devices.
 
-> Using Tailwind? Check out Aski, an [open source suite of Tailwind elements](https://github.com/askides/aski) For React. No Lock-In. Just Copy, Paste, Build.
-
 ### Features
 
 - **Masonry Layout**: Create beautiful masonry layouts with ease.
