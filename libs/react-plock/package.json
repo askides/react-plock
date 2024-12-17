@@ -1,6 +1,7 @@
 {
   "name": "react-plock",
   "version": "3.0.2",
+  "type": "module",
   "description": "The 1kB Masonry Grid for React",
   "author": "Renato Pozzi <askides@proton.me>",
   "homepage": "https://github.com/askides/react-plock#readme",
@@ -19,26 +20,18 @@
     "url": "git+https://github.com/askides/react-plock.git"
   },
   "scripts": {
-    "test": "jest",
+    "test": "vitest run",
     "lib:bump": "changelogen --bump",
     "lib:bump:dev": "changelogen --bump --prerelease dev",
     "lib:publish": "changelogen --publish",
     "lib:publish:dev": "npm publish react-plock --tag dev",
     "lib:release": "semantic-release",
-    "build": "tsup index.ts --dts --minify"
+    "build": "vite build"
   },
   "bugs": {
     "url": "https://github.com/askides/react-plock/issues"
   },
   "peerDependencies": {
     "react": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^29.4.0",
-    "@types/react": "^18.0.28",
-    "changelogen": "^0.5.5",
-    "jest": "^29.4.3",
-    "semantic-release": "^22.0.12",
-    "ts-jest": "^29.0.5"
   }
 }
