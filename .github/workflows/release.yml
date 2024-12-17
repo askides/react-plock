@@ -26,15 +26,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm i
 
       - name: Run Tests
-        run: pnpm run lib:test
+        run: pnpm run --filter react-plock test
 
       - name: Build
-        run: pnpm run lib:build
+        run: pnpm run --filter react-plock build
 
       - name: Copy README
         run: cp README.md libs/react-plock/dist/
@@ -42,22 +43,42 @@ jobs:
       - name: Manual Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           VERSION: ${{ inputs.version }}
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          npm version $VERSION
+
+          # Change directory to the package
+          cd libs/react-plock
+
+          # Update version in package.json
+          npm version $VERSION --no-git-tag-version
+
+          # Return to root
+          cd ../../
+
+          # Commit the version change
+          git add .
+          git commit -m "chore: release v${VERSION}"
+          git tag "v${VERSION}"
+
+          # Publish to npm
           pnpm --filter react-plock publish
 
       - name: Generate Changelog
         id: changelog
         run: |
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^)
-          CHANGELOG=$(git log --pretty=format:"- %s" ${PREVIOUS_TAG}..HEAD)
-          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-          echo "$CHANGELOG" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          REPO="${GITHUB_REPOSITORY}"
+          {
+            echo "CHANGELOG<<EOF"
+            echo "# Changelog"
+            echo ""
+            git log --pretty=format:"- %s (${REPO}@%h)" ${PREVIOUS_TAG}..HEAD
+            echo ""
+            echo "EOF"
+          } >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: actions/create-release@v1

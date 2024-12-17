@@ -7,7 +7,7 @@
   "homepage": "https://github.com/askides/react-plock#readme",
   "license": "ISC",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "directories": {
     "dist": "dist"
