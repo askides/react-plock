@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@local/lib": ["../../libs/react-plock/index"],
+      "@local/lib": ["../../libs/react-plock/src/index"],
       "@assets/*": ["../../assets/*"]
     }
   },

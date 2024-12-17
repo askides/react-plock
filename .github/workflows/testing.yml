@@ -19,4 +19,4 @@ jobs:
           version: 8
 
       - run: pnpm install
-      - run: pnpm run lib:test
+      - run: pnpm run --filter react-plock test

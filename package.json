@@ -1,15 +1,14 @@
 {
   "name": "react-plock-mono",
   "private": true,
-  "scripts": {
-    "lib:test": "pnpm --filter react-plock test",
-    "lib:build": "pnpm --filter react-plock build",
-    "lib:release": "pnpm --filter react-plock lib:release",
-    "demo:build": "pnpm --filter with-vite build"
-  },
   "devDependencies": {
     "@types/node": "^18.14.4",
-    "tsup": "^6.6.3",
-    "typescript": "^5.3.3"
+    "@types/react": "^18.2.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.3.3",
+    "vite": "^6.0.3",
+    "vite-plugin-dts": "^4.3.0",
+    "vitest": "^2.1.8",
+    "jsdom": "^25.0.1"
   }
 }
