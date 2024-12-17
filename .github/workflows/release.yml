@@ -1,10 +1,12 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-      - dev
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
 
 jobs:
   release:
@@ -31,11 +33,19 @@ jobs:
       - name: Run Tests
         run: pnpm run lib:test
 
-      - name: Install dependencies
+      - name: Build
         run: pnpm run lib:build
 
-      - name: Semantic Release
+      - name: Copy README
+        run: cp README.md libs/react-plock/dist/
+
+      - name: Manual Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm run lib:release
+          VERSION: ${{ inputs.version }}
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          npm version $VERSION
+          pnpm --filter react-plock publish
