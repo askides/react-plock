@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { createChunks, createDataColumns } from '.';
+import { render } from '@testing-library/react';
+import { Masonry } from '.';
 
 describe('Plock', () => {
   it('should create chunks', () => {
@@ -74,5 +76,63 @@ describe('Plock', () => {
       [1, 3, 5, 7, 9, 11, 13],
       [2, 4, 6, 8, 10, 12, 14],
     ]);
+  });
+});
+
+describe('Integration Tests', () => {
+  it('should render with different HTML elements using "as" prop', () => {
+    const items = [1, 2, 3];
+    const config = { columns: 3, gap: 10 };
+
+    // Test with 'section' element
+    const { container: sectionContainer } = render(
+      <Masonry
+        items={items}
+        render={(item) => <div key={item}>{item}</div>}
+        config={config}
+        as="section"
+      />
+    );
+
+    // Test with 'article' element
+    const { container: articleContainer } = render(
+      <Masonry
+        items={items}
+        render={(item) => <div key={item}>{item}</div>}
+        config={config}
+        as="article"
+      />
+    );
+
+    expect(sectionContainer.querySelector('section')).toBeTruthy();
+    expect(articleContainer.querySelector('article')).toBeTruthy();
+  });
+
+  it('should render with custom React component using "as" prop', () => {
+    const CustomComponent = ({
+      children,
+      className,
+    }: {
+      children: React.ReactNode;
+      className?: string;
+    }) => <div className={`custom-wrapper ${className || ''}`}>{children}</div>;
+
+    const items = [1, 2, 3];
+    const config = { columns: 3, gap: 10 };
+
+    const { container } = render(
+      <Masonry
+        items={items}
+        render={(item) => <div key={item}>{item}</div>}
+        config={config}
+        as={CustomComponent}
+        className="test-class"
+      />
+    );
+
+    const customElement = container.querySelector('.custom-wrapper');
+
+    expect(customElement).toBeTruthy();
+    expect(customElement?.classList.contains('test-class')).toBeTruthy();
   });
 });
