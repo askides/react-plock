@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createChunks, createDataColumns } from './Plock';
+import { createChunks, createDataColumns } from '.';
 
 describe('Plock', () => {
   it('should create chunks', () => {
