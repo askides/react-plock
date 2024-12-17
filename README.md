@@ -26,7 +26,7 @@ npm install react-plock
 Using Plock with the new v3 APIs it's a piece of cake. Here's an example of how can you create an [Unsplash-Like](https://unsplash.com/) masonry grid. You can even see a demo of this example by clicking [here](https://react-plock.netlify.app/).
 
 ```tsx
-import { Masonry } from "react-plock";
+import { Masonry } from 'react-plock';
 
 const ImagesMasonry = () => {
   const items = [...imageUrls];
@@ -40,7 +40,7 @@ const ImagesMasonry = () => {
         media: [640, 768, 1024],
       }}
       render={(item, idx) => (
-        <img key={idx} src={item} style={{ width: "100%", height: "auto" }} />
+        <img key={idx} src={item} style={{ width: '100%', height: 'auto' }} />
       )}
     />
   );
@@ -52,7 +52,7 @@ const ImagesMasonry = () => {
 Here's the TypeScript definition for the Masonry Component, below you can find a more detailed explanation.
 
 ```ts
-export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
+export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
   config: {
@@ -60,6 +60,7 @@ export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
     gap: number | number[];
     media?: number[];
   };
+  as?: React.ElementType;
 };
 ```
 
