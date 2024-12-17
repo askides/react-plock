@@ -30,5 +30,11 @@
   },
   "peerDependencies": {
     "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2"
   }
 }

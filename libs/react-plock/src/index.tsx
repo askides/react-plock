@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 export function useMediaValues(
   medias: number[] | undefined,
@@ -36,12 +36,12 @@ export function useMediaValues(
 
     // Apply Listeners
     for (const mediaQuery of mediaQueries) {
-      mediaQuery.addEventListener("change", onSizeChange);
+      mediaQuery.addEventListener('change', onSizeChange);
     }
 
     return () => {
       for (const mediaQuery of mediaQueries) {
-        mediaQuery.removeEventListener("change", onSizeChange);
+        mediaQuery.removeEventListener('change', onSizeChange);
       }
     };
   }, [values.columns, values.gap]);
@@ -49,7 +49,7 @@ export function useMediaValues(
   return values;
 }
 
-export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
+export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
   items: T[];
   render: (item: T, idx: number) => React.ReactNode;
   config: {
@@ -57,6 +57,7 @@ export type MasonryProps<T> = React.ComponentPropsWithoutRef<"div"> & {
     gap: number | number[];
     media?: number[];
   };
+  as?: React.ElementType;
 };
 
 export function createSafeArray(data: number | number[]) {
@@ -67,6 +68,7 @@ export function Masonry<T>({
   items = [],
   render,
   config,
+  as: Component = 'div',
   ...rest
 }: MasonryProps<T>) {
   const { columns, gap } = useMediaValues(
@@ -81,11 +83,11 @@ export function Masonry<T>({
   const dataColumns = createDataColumns<T>(chunks, columns);
 
   return (
-    <div
+    <Component
       {...rest}
       style={{
-        display: "grid",
-        alignItems: "start",
+        display: 'grid',
+        alignItems: 'start',
         gridColumnGap: gap,
         gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
       }}
@@ -95,7 +97,7 @@ export function Masonry<T>({
           {column.map((item, idx) => render(item, idx))}
         </MasonryRow>
       ))}
-    </div>
+    </Component>
   );
 }
 
@@ -109,9 +111,9 @@ export function MasonryRow({
   return (
     <div
       style={{
-        display: "grid",
+        display: 'grid',
         rowGap: gap,
-        gridTemplateColumns: "minmax(0, 1fr)",
+        gridTemplateColumns: 'minmax(0, 1fr)',
       }}
     >
       {children}
