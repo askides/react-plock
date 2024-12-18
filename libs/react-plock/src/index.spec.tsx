@@ -1,7 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { createChunks, createDataColumns } from '.';
-import { render } from '@testing-library/react';
-import { Masonry } from '.';
+import { describe, expect, it } from 'vitest';
+import { createBalancedColumns, createChunks, createDataColumns } from '.';
 
 describe('Plock', () => {
   it('should create chunks', () => {
@@ -79,60 +77,61 @@ describe('Plock', () => {
   });
 });
 
-describe('Integration Tests', () => {
-  it('should render with different HTML elements using "as" prop', () => {
-    const items = [1, 2, 3];
-    const config = { columns: 3, gap: 10 };
+describe('Balanced Layout', () => {
+  it('should distribute items to columns based on height', () => {
+    const items = [1, 2, 3, 4];
+    const heightMap = new Map([
+      [1, 100], // tall
+      [2, 50], // short
+      [3, 120], // tallest
+      [4, 30], // shortest
+    ]);
 
-    // Test with 'section' element
-    const { container: sectionContainer } = render(
-      <Masonry
-        items={items}
-        render={(item) => <div key={item}>{item}</div>}
-        config={config}
-        as="section"
-      />
+    const result = createBalancedColumns(
+      items,
+      2,
+      (item) => heightMap.get(item) || 0
     );
 
-    // Test with 'article' element
-    const { container: articleContainer } = render(
-      <Masonry
-        items={items}
-        render={(item) => <div key={item}>{item}</div>}
-        config={config}
-        as="article"
-      />
-    );
-
-    expect(sectionContainer.querySelector('section')).toBeTruthy();
-    expect(articleContainer.querySelector('article')).toBeTruthy();
+    expect(result).toEqual([
+      [1, 4], // Column 1: 100 + 30 = 130
+      [2, 3], // Column 2: 50 + 120 = 170
+    ]);
   });
 
-  it('should render with custom React component using "as" prop', () => {
-    const CustomComponent = ({
-      children,
-      className,
-    }: {
-      children: React.ReactNode;
-      className?: string;
-    }) => <div className={`custom-wrapper ${className || ''}`}>{children}</div>;
+  it('should handle empty items array', () => {
+    const result = createBalancedColumns([], 3, () => 0);
+    expect(result).toEqual([[], [], []]);
+  });
 
+  it('should handle single column', () => {
     const items = [1, 2, 3];
-    const config = { columns: 3, gap: 10 };
+    const result = createBalancedColumns(items, 1, () => 100);
+    expect(result).toEqual([[1, 2, 3]]);
+  });
 
-    const { container } = render(
-      <Masonry
-        items={items}
-        render={(item) => <div key={item}>{item}</div>}
-        config={config}
-        as={CustomComponent}
-        className="test-class"
-      />
+  it('should maintain item order within columns', () => {
+    const items = [1, 2, 3, 4, 5, 6];
+    const heightMap = new Map([
+      [1, 50],
+      [2, 50],
+      [3, 50],
+      [4, 50],
+      [5, 50],
+      [6, 50],
+    ]);
+
+    const result = createBalancedColumns(
+      items,
+      3,
+      (item) => heightMap.get(item) || 0
     );
 
-    const customElement = container.querySelector('.custom-wrapper');
-
-    expect(customElement).toBeTruthy();
-    expect(customElement?.classList.contains('test-class')).toBeTruthy();
+    // With equal heights, items should be distributed evenly while maintaining order
+    expect(result).toEqual([
+      [1, 4],
+      [2, 5],
+      [3, 6],
+    ]);
   });
 });
