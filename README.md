@@ -23,7 +23,7 @@ npm install react-plock
 
 ### Usage
 
-Using Plock with the new v3 APIs it's a piece of cake. Here's an example of how can you create an [Unsplash-Like](https://unsplash.com/) masonry grid. You can even see a demo of this example by clicking [here](https://react-plock.netlify.app/).
+Using Plock with the new v3 APIs it's a piece of cake. Here's an example of how can you create a masonry grid. You can even see a demo of this example by clicking [here](https://react-plock-with-vite.vercel.app/).
 
 ```tsx
 import { Masonry } from 'react-plock';
@@ -47,6 +47,29 @@ const ImagesMasonry = () => {
 };
 ```
 
+### Balanced Layout
+
+React Plock offers a balanced layout option that creates a more visually harmonious masonry grid by considering the height of each item. When enabled with `useBalancedLayout: true`, the layout algorithm distributes items across columns while attempting to minimize height differences between columns.
+
+This is particularly useful for content with varying heights, such as images or cards, where a traditional masonry layout might create uneven columns.
+
+Unlike the default layout which distributes items sequentially, the balanced layout dynamically measures and adjusts item placement to create a more aesthetically pleasing result.
+
+```tsx
+<Masonry
+  items={items}
+  config={{
+    columns: [2, 3, 4],
+    gap: [16, 16, 16],
+    media: [640, 768, 1024],
+    useBalancedLayout: true, // Enable balanced layout
+  }}
+  render={(item) => (
+    <img src={item.url} alt={item.alt} style={{ width: '100%' }} />
+  )}
+/>
+```
+
 ### API Reference
 
 Here's the TypeScript definition for the Masonry Component, below you can find a more detailed explanation.
@@ -59,6 +82,7 @@ export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
     columns: number | number[];
     gap: number | number[];
     media?: number[];
+    useBalancedLayout?: boolean;
   };
   as?: React.ElementType;
 };
