@@ -3,12 +3,10 @@
   "private": true,
   "devDependencies": {
     "@types/node": "^18.14.4",
-    "@types/react": "^18.2.0",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.3.3",
     "vite": "^6.0.3",
     "vite-plugin-dts": "^4.3.0",
-    "vitest": "^2.1.8",
-    "jsdom": "^25.0.1"
+    "vitest": "^2.1.8"
   }
 }
