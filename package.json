@@ -4,6 +4,7 @@
   "devDependencies": {
     "@types/node": "^18.14.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
     "typescript": "^5.3.3",
     "vite": "^6.0.3",
     "vite-plugin-dts": "^4.3.0",
