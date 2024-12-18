@@ -37,9 +37,6 @@ jobs:
       - name: Build
         run: pnpm run --filter react-plock build
 
-      - name: Copy README
-        run: cp README.md libs/react-plock/dist/
-
       - name: Manual Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
