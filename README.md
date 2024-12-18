@@ -5,6 +5,7 @@ React Plock is a tree-shakeable **ultra small** npm package (**less than 1kB gzi
 ### Features
 
 - **Masonry Layout**: Create beautiful masonry layouts with ease.
+- **Balanced Layout**: Create a more visually harmonious masonry grid by considering the height of each item.
 - **Responsive**: Automatically adapts to different screen sizes and devices.
 - **Customizable**: Customize the layout to match your needs.
 - **TypeScript Ready**: Get the strength of type-safe languages.
