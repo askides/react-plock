@@ -1,53 +1,7 @@
-import React, { useEffect, useState } from 'react';
-
-export function useMediaValues(
-  medias: number[] | undefined,
-  columns: number[],
-  gap: number[]
-) {
-  const [values, setValues] = useState({ columns: 0, gap: 1 });
-
-  useEffect(() => {
-    if (!medias) {
-      setValues({ columns: columns[0], gap: gap[0] });
-      return;
-    }
-
-    const mediaQueries = medias.map((media) =>
-      window.matchMedia(`(min-width: ${media}px)`)
-    );
-
-    const onSizeChange = () => {
-      let matches = 0;
-
-      mediaQueries.forEach((mediaQuery) => {
-        if (mediaQuery.matches) {
-          matches++;
-        }
-      });
-
-      // Update Values
-      const idx = Math.min(mediaQueries.length - 1, Math.max(0, matches));
-      setValues({ columns: columns[idx], gap: gap[idx] });
-    };
-
-    // Initial Call
-    onSizeChange();
-
-    // Apply Listeners
-    for (const mediaQuery of mediaQueries) {
-      mediaQuery.addEventListener('change', onSizeChange);
-    }
-
-    return () => {
-      for (const mediaQuery of mediaQueries) {
-        mediaQuery.removeEventListener('change', onSizeChange);
-      }
-    };
-  }, [values.columns, values.gap]);
-
-  return values;
-}
+import React, { useState } from 'react';
+import { createSafeArray } from './utils/createSafeArray';
+import { useGridStyles } from './utils/useGridStyles';
+import { useMediaValues } from './utils/useMediaValues';
 
 export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
   items: T[];
@@ -56,13 +10,10 @@ export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
     columns: number | number[];
     gap: number | number[];
     media?: number[];
+    useBalancedLayout?: boolean;
   };
   as?: React.ElementType;
 };
-
-export function createSafeArray(data: number | number[]) {
-  return Array.isArray(data) ? data : [data];
-}
 
 export function Masonry<T>({
   items = [],
@@ -71,30 +22,47 @@ export function Masonry<T>({
   as: Component = 'div',
   ...rest
 }: MasonryProps<T>) {
+  const [heights, setHeights] = useState<Map<T, number>>(new Map());
   const { columns, gap } = useMediaValues(
     config.media,
     createSafeArray(config.columns),
     createSafeArray(config.gap)
   );
 
+  const styles = useGridStyles(columns, gap);
+
   if (!columns) return null;
 
-  const chunks = createChunks<T>(items, columns);
-  const dataColumns = createDataColumns<T>(chunks, columns);
+  // Choose layout strategy based on config
+  const dataColumns = config.useBalancedLayout
+    ? createBalancedColumns(items, columns, (item) => heights.get(item) ?? 0)
+    : createDataColumns(createChunks(items, columns), columns);
 
   return (
-    <Component
-      {...rest}
-      style={{
-        display: 'grid',
-        alignItems: 'start',
-        gridColumnGap: gap,
-        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-      }}
-    >
-      {dataColumns.map((column, idx) => (
-        <MasonryRow gap={gap} key={idx}>
-          {column.map((item, idx) => render(item, idx))}
+    <Component {...rest} style={styles}>
+      {dataColumns.map((column, columnIdx) => (
+        <MasonryRow gap={gap} key={columnIdx}>
+          {column.map((item, idx) => (
+            <div
+              key={idx}
+              ref={(node) => {
+                if (node && config.useBalancedLayout) {
+                  const height = node.getBoundingClientRect().height;
+
+                  if (heights.get(item) !== height) {
+                    // Update heights state if changed, triggering re-render
+                    setHeights((prev) => {
+                      const next = new Map(prev);
+                      next.set(item, height);
+                      return next;
+                    });
+                  }
+                }
+              }}
+            >
+              {render(item, idx)}
+            </div>
+          ))}
         </MasonryRow>
       ))}
     </Component>
@@ -141,6 +109,33 @@ export function createDataColumns<T>(data: T[][] = [], columns = 3) {
         result[idx].push(data[jdx][idx]);
       }
     }
+  }
+
+  return result;
+}
+
+export function createBalancedColumns<T>(
+  items: T[],
+  columns: number,
+  getHeight: (item: T) => number
+): T[][] {
+  const result = Array.from<T[], T[]>({ length: columns }, () => []);
+  const columnHeights = new Array(columns).fill(0);
+
+  // Maintain original order, but distribute to shortest column
+  for (const item of items) {
+    let shortestColumnIndex = 0;
+    let minHeight = columnHeights[0];
+
+    for (let i = 1; i < columns; i++) {
+      if (columnHeights[i] < minHeight) {
+        minHeight = columnHeights[i];
+        shortestColumnIndex = i;
+      }
+    }
+
+    result[shortestColumnIndex].push(item);
+    columnHeights[shortestColumnIndex] += getHeight(item);
   }
 
   return result;
