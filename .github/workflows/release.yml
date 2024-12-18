@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v3
         with:
@@ -61,7 +61,9 @@ jobs:
           # Commit the version change
           git add .
           git commit -m "chore: release v${VERSION}"
-          git tag "v${VERSION}"
+
+          # Push the version change commit
+          git push
 
           # Publish to npm
           pnpm --filter react-plock publish
