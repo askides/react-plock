@@ -1,6 +1,6 @@
 {
   "name": "react-plock",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "type": "module",
   "description": "The 1kB Masonry Grid for React",
   "author": "Renato Pozzi <askides@proton.me>",
