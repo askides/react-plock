@@ -1,9 +1,8 @@
 'use client';
 
-import { images } from '@assets/data/images';
-import { Masonry } from '@local/lib';
-import { Button } from './ui/Button';
 import { useState } from 'react';
+import { Masonry } from 'react-plock';
+import { Button } from './ui/Button';
 
 const items = [
   { height: 600, color: '#D32F2F', id: 1 }, // Extra Tall - Darker Red

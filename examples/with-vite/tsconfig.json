@@ -17,7 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@local/lib": ["../../libs/react-plock/src/index"],
       "@assets/*": ["../../assets/*"]
     }
   },
