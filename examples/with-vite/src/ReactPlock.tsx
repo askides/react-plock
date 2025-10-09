@@ -1,4 +1,4 @@
-import { Masonry } from '@local/lib';
+import { Masonry } from 'react-plock';
 import { useState } from 'react';
 import { Button } from './ui/Button';
 
