@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { createSafeArray } from './utils/createSafeArray';
+import React, { useState, useMemo } from 'react';
 import { useGridStyles } from './utils/useGridStyles';
 import { useMediaValues } from './utils/useMediaValues';
+
+export function asList(data: number | number[]) {
+  return Array.isArray(data) ? data : [data];
+}
 
 export type MasonryProps<T> = React.ComponentPropsWithoutRef<'div'> & {
   items: T[];
@@ -23,11 +26,9 @@ export function Masonry<T>({
   ...rest
 }: MasonryProps<T>) {
   const [heights, setHeights] = useState<Map<T, number>>(new Map());
-  const { columns, gap } = useMediaValues(
-    config.media,
-    createSafeArray(config.columns),
-    createSafeArray(config.gap)
-  );
+  const _columns = useMemo(() => asList(config.columns), [config.columns]);
+  const _gaps = useMemo(() => asList(config.gap), [config.gap]);
+  const { columns, gap } = useMediaValues(config.media, _columns, _gaps);
 
   const styles = useGridStyles(columns, gap);
 
